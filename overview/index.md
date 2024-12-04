@@ -1,6 +1,6 @@
 ---
-title: My docs
-description: Learn more about my project in this docs site built with Starlight.
+title: Introduction
+description: Learn more about PulseBeam
 ---
 
-Welcome to my project!
+Work in progress...
