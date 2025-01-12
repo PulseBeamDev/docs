@@ -5,9 +5,9 @@ description: Getting Started with Pulsebeam
 
 ## What are we going to do?
  
+* Create **real-time text editor** between two peers
 * Account setup. 
 * Run a demo locally. 
-* Create a WebRTC peer to peer data channel using PulseBeam. 
 
 Let's get started.
 
@@ -24,8 +24,8 @@ You will need `npm` and `node.js` installed on your system <a href="https://docs
 git clone git@github.com:PulseBeamDev/pulsebeam-js.git
 cd pulsebeam-js/demo-cdn
 npm i
-export PULSEBEAM_API_KEY="my_api_key"
-export PULSEBEAM_API_SECRET="my_api_secret"
+export PULSEBEAM_API_KEY="kid_..."
+export PULSEBEAM_API_SECRET="sk_..."
 npm run start
 ```
 

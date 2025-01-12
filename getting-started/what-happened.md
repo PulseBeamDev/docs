@@ -56,7 +56,7 @@ peer → peer.connect('peer-29') → PulseBeam Signaling Servers → connected
 
 ### Diagram
 
-<img src="/public/getting-started.quickstart.seq.svg"></img>
+![Quickstart Sequence Diagram](../../../../assets/getting-started.quick-start.seq.svg)
 
 ## Tips 
 
