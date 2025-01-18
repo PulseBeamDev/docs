@@ -3,7 +3,7 @@ title: Security
 description: Understanding security in PulseBeam
 ---
 
-# Security Overview for PulseBeam
+# 1. Security Overview for PulseBeam
 
 PulseBeam provides a real-time communication platform, leveraging WebRTC's robust encryption with additional layers of protection to keep your real-time communication safe. We have a shared responsibility model and work together with you to secure your projects and data. Below is an outline of the security principles, architecture, features, and practices that we provide.
 
@@ -11,10 +11,11 @@ You will need a basic understanding of security. This is written for developers 
 
 Terms we will use:
 
-* You/Your - Refers to developers using PulseBeam CPaaS, you login to console and get keys to write web applications. This documentation is written to be used by you, someone using @pulsebeam/server and @pulsebeam/peer SDKs to create applications.
-* Application/Project the app you are creating with PulseBeam.
-* Peer/Customer/User/End-User, e.g. Alice and Bob the indended audience for you application
-* Us/PulseBeam - PulseBeam, us, the CPaaS provider
+* YOU/YOUR - Refers to developers using PulseBeam CPaaS, you login to console and get keys to write web applications. This documentation is written to be used by you, someone using @pulsebeam/server and @pulsebeam/peer SDKs to create applications.
+* APPLICATION/PROJECT - the app you are creating with PulseBeam.
+* PEER/CUSTOMER/USER/END-USER - e.g. Alice and Bob the intended audience for your application
+* US/PULSEBEAM - PulseBeam, us, the CPaaS provider
+* SECRETS/PRIVATE KEYS - the private key in the asymmetric key set provided by PulseBeam to you
 
 # 2. Security Architecture Overview
 
@@ -119,7 +120,7 @@ This can be made possible through the use of identity providers or other systems
 
 PulseBeam uses the token you issue to your customer to determine their identity and their permissions.
 
-# 4. Encryption and Data Protection
+# 5. Encryption and Data Protection
 
 Encryption protects from sniffing and tampering. Encryption is vital to security.
 
@@ -128,7 +129,7 @@ Encryption protects from sniffing and tampering. Encryption is vital to security
 
 We recommend encrypting communications between your services and customers. This greatly improves your security profile. 
 
-## 4.1 WebRTC Media/Data Encryption
+## 5.1 WebRTC Media/Data Encryption
 
 Encryption on all communication is a mandatory in WebRTC:
 
@@ -149,140 +150,73 @@ DTLS-SRTP facilitates secure key exchanges, enabling detection of potential Man-
 
 Read more on DTLS and SRTP in WebRTC for the Curious and the standards.
 
-## 4.2 Signaling Security
+## 5.2 Signaling Security
 
-* All signaling traffic encrypted using HTTPS
-* Token validation for all resource access
-* Secure key exchange mechanisms
+* All PulseBeam signaling traffic is encrypted using HTTPS
+* Signaling uses Token validation for all resource access
+* Tokens ensures only users whom you issued tokens to can participate in connections.
+* This protects customer data like SDPs
 
-Signaling Layer Security
+## 5.3 TURN / STUN Security
 
-PulseBeam enforces encrypted signaling. 
+You can conceptualize the TURN server as an intermediary router between the two peers. 
 
-The signaling layer facilitates communication setup but is not inherently secured by WebRTC. PulseBeam Signaling:
+PulseBeam TURN servers cannot decode application-level data because encryption on all communication is a mandatory in WebRTC. Only the two peers participating in the call have ability to decrypt.
 
-* We enforce encrypted signaling using HTTPS to secure signaling traffic.
+Resultantly, the protections put in place through encryption are not compromised during WebRTC communication over TURN. The server is unable to decode application-level data, it cannot understand or modify information that peers send to each other. Ensuring encryption and privacy remains intact during relay.
 
-These measures protect signaling data from interception and ensure only users whom you issued tokens can initiate or participate in sessions.
-
-PulseBeam guarantees that signaling is encrypted preventing sniffing of customer data in transit, tampering of data providing both security.
-
-## 4.3 TURN / STUN Security
-
-Because keys are negotiated in an encrypted channel directly between the peers, the keys are only accessible to the peers. Therefore, PulseBeam TURN servers cannot decode application-level data
-
-* Turn Server Security: Our TURN servers only relay traffic as a backup for routing purposes, are unable to decode application-level data, ensuring encryption remains intact during relay.
-
-Resultantly, the protections put in place through encryption are therefore not compromised during WebRTC communication over TURN, and the server cannot understand or modify information that peers send to each other.
-
-You can conceptualize the TURN server as an intermediary router between the two peers. Same principles of security apply, the traffic is encrypted.
+Our TURN servers by default only relay traffic as a backup for routing purposes when peer network infrastructure prevents a direct peer to peer connection.
 
 # 6. Shared Security Responsibility Model
 
-Security in real-time communication is a shared responsibility. While PulseBeam provides a secure platform, you play a crucial role in safeguarding end-user data.
+Security is a shared responsibility. While PulseBeam provides a secure platform, you play a crucial role in safeguarding end-user data and experience.
 
-* Customer Responsibilities:
-    * End-User Authentication: Ensure only authorized users access your platform.
-    * Encryption: Ensure you only use HTTPS, secure clients, and encrypt communication with your customers.
-    * Token Management: Securely generate and transmit tokens to end-users.
-    * Data Protection: Encrypt communication between your platform and end-users.
-    * Key Rotation: Implement regular key rotation and secure storage practices.
-
-* Shared Responsibilities:
-    * Keys: PulseBeam API Keys are asymmetric. We do not store your private keys. Private keys are only available on generation. Store them securely.
-    * Key Management: Protect PulseBeam API keys and secrets collaboratively. Rotate keys regularly.
-    * PulseBeam Account: Protect your account, only give access to your project(s) with people you trust. People you give access to can delete projects, delete keys, and create keys.
-
-By following these best practices, customers can protect the security of their applications and maintain end-user trust.
-
-
-![Quickstart Sequence Diagram](../../../../assets/concepts.security.shared.svg)
-
-
-PulseBeam Responsibilities:
-
-    Infrastructure Security: Ensuring the servers (e.g., signaling servers, media servers) and storage systems are encrypted, secure, and reliable.
-    Signaling and Media Encryption:
-        Encrypting all communication between our servers and your end users as well as your end users and end users (provided by WebRTC).
-    Platform Uptime and Reliability: Maintaining secure and available infrastructure for uninterrupted service meeting SLAs.
-    Key Management:
-        Safeguarding your accounts and data in our backend.
-
-Your Responsibilities:
-
-    Customer End-User Authentication:
-        Authenticating your customers and ensuring only authorized users can access your projects(s).
-    Token Management:
-        Generating tokens for your end-users securely.
-        Transmitting tokens securely to your end-users.
-    Data Encryption:
-        Encrypting communication between your platform and your end-users.
-    Key Management:
-        Rotating keys regularly and implementing secure secret storage.
-    Customer End-User Data Protection:
-        Ensuring their own customers' data is protected in transit and at rest.
-
-Shared Responsibilities:
-
-    Key Management:
-        Protecting PulseBeam API keys and secrets (shared responsibility with CPaaS).
-
+![Shared Responsibility Model Overview Diagram](../../../../assets/concepts.security.shared.svg)
 
 ## 6.1 PulseBeam Responsibilities
 
-Infrastructure security
-Platform encryption
-Signaling server security
-TURN/STUN server management
-Token validation
-Access control enforcement
+* Infrastructure Security: Ensuring servers (e.g., signaling servers, TURN servers, STUN servers) and storage systems are encrypted, secure, and reliable.
+* Platform encryption. Encrypting traffic through our services as well as between your end users and end users.
+* Platform Uptime and Reliability: Maintaining secure and available infrastructure for service meeting or exceeding SLAs.
+* Token validation: Ensuring traffic comes from users with valid tokens.
+* PulseBeam Account: Prevent unauthorized access on your PulseBeam projects. Enforce sharing and access control to your settings.
+* Security Policy Enforcement: Ensure traffic matches allow policies set by you on tokens you minted.
 
-## 6.2 Customer Responsibilities
+## 6.2 Your Responsibilities
 
-End-user authentication
-Token generation and management
-Private key protection
-Security policy configuration
-Client-side encryption implementation
-End-user data protection
+* Customer End-User Authentication: Authenticating your customers and ensuring only authorized users can access your projects(s).
+* Security policy configuration: Setting policies on tokens to be as restrictive as possible.
+* Token Generation and Management: Generating tokens for your end-users securely. Transmitting tokens securely to your end-users.
+* Data Encryption: Protect end-user data. Encrypt communication between your platform and end-users. Use secure clients, HTTPS web clients, and encrypt communication with your customers.
+* Key Management: Rotating keys regularly and implementing secure secret storage.
+* PulseBeam Account Access Management: Protect your account, only give access to your project(s) with people you trust. People you give access to can delete projects, delete keys, and create keys. Keys allow token generation.
 
 ## 6.3 Shared Responsibilities
 
-Key rotation practices
-Account security
-Access management
-Incident response
-Security monitoring
+* PulseBeam Account: Safeguarding your accounts and data in our backend. You create accounts and projects. PulseBeam protects your account and data. Shares project access according to your allow list.
+* Security Policy: You set policies on tokens PulseBeam enforces policies on traffic and usage. 
+* Key Management: Protecting PulseBeam API keys and secrets. PulseBeam API Keys are asymmetric. We do not store your private keys. Private keys are only available on generation. PulseBeam does not store your private keys. You must store them securely. PulseBeam encrypts traffic including keys in transit.
+* Security monitoring: Both you and PulseBeam monitor for security vulnerabilities.
+* Incident response: Both you and PulseBeam cooperate to respond to security incidents.
 
 # 7. Security Checklist
 
-Best Practices and Recommendations
+By following these best practices, customers can protect the security of their applications and maintain end-user trust.
 
-We encourage developers to adopt secure coding practices, especially for applications handling sensitive information. Best practices include:
+We encourage developers to adopt secure practices, especially for applications handling sensitive information. Best practices and recommendations include:
 
-* Encrypting your traffic using secure encryption protocols.
+* Encrypting your traffic using secure encryption protocols for all client communications.
+* Implement proper user authentication
 * Pre-registering users or requiring authentication before allowing participation in connections.
-* Clearly communicating permission requests to users to prioritize privacy.
+* Clearly communicating permission requests to users to prioritize privacy. Privacy and User Consent recommend to highlight to the user what permission they are giving
+* Implement short token TTL
+* Secure token transmission
+* Regular key rotation
+* Strict policy configuration
+* Follow secure coding practices
+* Monitor for suspicious activities
 
-## 7.1 Token Management
-
-Implement short token TTL
-Secure token transmission
-Regular key rotation
-Strict policy configuration
-
-## 7.2 Privacy and User Consent
-
-reccomend to highlight to the user what permission they are giving
-
-## 7.2 Security Implementation
-
-Use HTTPS for all client communications
-Implement proper user authentication
-Follow secure coding practices
-Monitor for suspicious activities
-
-## 9. Conclusion
+## 8. Conclusion
 
 PulseBeam's security provides a robust foundation to secure real-time communications. PulseBeam leverages WebRTC's security features and supplements them with additional protections to deliver a secure, reliable communication platform.  By following our shared responsibility model and implementing recommended security practices, you can ensure a high level of security for your applications and users.
 
