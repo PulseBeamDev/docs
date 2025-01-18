@@ -5,16 +5,16 @@ description: Understanding security in PulseBeam
 
 # 1. Security Overview for PulseBeam
 
-PulseBeam provides a real-time communication platform, leveraging WebRTC's robust encryption with additional layers of protection to keep your real-time communication safe. We have a shared responsibility model and work together with you to secure your projects and data. Below is an outline of the security principles, architecture, features, and practices that we provide.
+PulseBeam provides a real-time communication platform, leveraging WebRTC's robust encryption with additional layers of protection to keep your real-time communication safe. We have a shared responsibility model and work with you to secure your projects and data. Below is an outline of the security principles, architecture, features, and practices that we provide.
 
-You will need a basic understanding of security. This is written for developers using PulseBeam. There is a checklist of recommendations at the end summarizing and reiterating recommendations.
+You will need a basic understanding of security. This overview is for developers using PulseBeam. At the end, a checklist of recommendations summarizing and reiterating recommendations.
 
 Terms we will use:
 
-* YOU/YOUR - Refers to developers using PulseBeam CPaaS, you login to console and get keys to write web applications. This documentation is written to be used by you, someone using @pulsebeam/server and @pulsebeam/peer SDKs to create applications.
+* YOU/YOUR — Refers to the intended reader, developers using PulseBeam CPaaS. You log in to the console and get keys to write web applications. You use `@pulsebeam/server` and `@pulsebeam/peer` SDKs to create applications.
 * APPLICATION/PROJECT - the app you are creating with PulseBeam.
 * PEER/CUSTOMER/USER/END-USER - e.g. Alice and Bob the intended audience for your application
-* US/PULSEBEAM - PulseBeam, us, the CPaaS provider
+* WE/US/PULSEBEAM - PulseBeam, us, the CPaaS provider
 * SECRETS/PRIVATE KEYS - the private key in the asymmetric key set provided by PulseBeam to you
 
 # 2. Security Architecture Overview
@@ -35,32 +35,38 @@ PulseBeam security architecture consists of several key components:
 
 ## 2.2 Typical Security Flow
 
+Explore our documentation for code samples. See Quick Start for a sample project using `@pulsebeam/server` and `@pulsebeam/peer` SDKs. See Reference for SDK documentation and more details.
+
 ### Initial Authentication
 
 1. Customers access your application, typically this will be a web app.
-1. Note web app is required to use HTTPS
+1. Note: Web apps must use HTTPS
 1. Customers hit your server/serverless endpoint hosting tokens
-1. Your endpoint uses PulseBeam Credentials with our @pulsebeam/server SDK to generate tokens for your customers
+1. Your endpoint uses PulseBeam Credentials with our `@pulsebeam/server` SDK to generate tokens for your customers
 1. Encrypt all traffic on your endpoint (e.g. HTTPS) so tokens are safe in transit.
 1. We recommend you authenticate Customers before issuing them tokens. You may want to authorize them as well.
+1. Note: Tokens are intended to be transient, directly returned to the client. You do not need to store them.
 
 ### User Session Establishment
 
-1. Customers use the tokens you gave them to access PulseBeam services. Typically, using @pulsebeam/peer SDK
-1. PulseBeam checks the token ensuring it was created with your private key.
-1. PulseBeam checks request and permissions. Request is authorized according to the security policy you set.
+1. Customers use the tokens you gave them to access PulseBeam services. Typically, using `@pulsebeam/peer` SDK
+1. You must use your private key, to generate valid PulseBeam tokens.
+1. PulseBeam authorizes requests based on the security policy you set on the token. 
 1. PulseBeam services establish WebRTC's connections
 
 ### Secure Communication
 
 1. PulseBeam Signaling services operates over HTTPS and establish WebRTC connections.
-1. All communication over WebRTC connections (media and data streams) are encrypted end-to-end
+1.  WebRTC enforces encryption on all communications (e.g. media and data streams) over connections end-to-end 
+
+All communication over WebRTC connections (media and data streams) are encrypted end-to-end
 1. When direct peer to peer fails due to customer network restrictions (e.g. firewall), PulseBeam TURN servers relay encrypted traffic without ability to decode customer data.
 
 
 # 3. Security Features and Controls
 
-Restrict permissions to what is required by your application to improve your security profile. PulseBeam provides:
+To improve your security profile, you should restrict permissions to the minimum permissibility required by your project. PulseBeam provides:
+
 * Token-based authentication system
 * Security policies on tokens
 * TTL (time-limited access) on tokens
@@ -74,15 +80,17 @@ Restrict permissions to what is required by your application to improve your sec
 * You define the security policy on the token. We enforce policies that you set on the token.
 * Security policies restrict which peer(s) the peer you minted the token for can connect to. 
 * We recommend more restrictive for higher security. To reduce potential impact of leaked tokens and prevent unintended usage.
-* You provide tokens to users, we recommend you authenticate users before providing them with tokens, to prevent spoofing and impersonation. Seem more in Authentication section.
+* You provide tokens to users, we recommend you authenticate users before providing them with tokens, to prevent spoofing and impersonation. See more in Authentication section.
 * You define a TTL on the token. We recommend shorter TTLS for higher security. As it reduces potential impact of leaked tokens
+* You should manage token lifecycle in your client. By monitoring token session expiration time and refreshing the token before it expires.
+* You can immediately invalidate all tokens minted by your key by deleting the key from your PulseBeam project. PulseBeam does not currently support individual token revocation.
 
 ### 3.2 Project Access Control
 
 * We recommend a 1:1 relationship between people and PulseBeam accounts.
 * A PulseBeam account can have many PulseBeam projects.
 * PulseBeam Projects can have many keys.
-* PulseBeam Projects can be shared with many PulseBeam accounts.
+* Many PulseBeam accounts can share ownership of one PulseBeam Project.
 
 Here is a sample of how you could manage a production application with project access controls.
 
@@ -92,21 +100,23 @@ Here is a sample of how you could manage a production application with project a
 ## 3.3 PulseBeam Project Keys 
 
 * Your PulseBeam keys are asymmetric.
-* Only you have your private key which is used to generate tokens for your customers. 
+* Use your private key to generate tokens for your customers. Only you have a copy of your private key.
 * Be sure to protect your keys. Especially your private key!
-* We keep a copy of your public key and use it to verify that the token was created by you. As well as to identify the key set if you want to delete and rotate your keys.
+* When you create a key set, we store a copy of your public key.
+* We use your public key to verify that tokens we receive were created by your private key.
+* Note: You can use your public key to identify key set(s) on your PulseBeam projects when rotating keys.
 * We recommend rotating your keys regularly. 
 
 # 4. Peer Authentication, Identity, and Authorization
 
-It is desirable for you to know the identity of whomever you issue tokens to. For many reasons:
+You should know the identity of whomever you issue tokens to for many reasons:
 * Allows you to secure your system: 
     * Control usage. Usage on your PulseBeam account can create bills
     * Detect and prevent bad actors
     * Ban and remove bad actors who appear
     * Allow peers to connect to other peers based on your desired application logic. You likely want to be able to verify the identity of their peers. E.g. if Alice wants to talk to Bob, making sure Bob is Bob, and you gave Bob's token to Bob is something you should ensure. And not an imposter of Bob!
 
-This can be made possible through the use of identity providers or other systems
+Identity providers are one way to identify your users:
 * OIDC Web-based identity providers (IdP) E.g.:
     * Google
     * Facebook
@@ -122,7 +132,7 @@ PulseBeam uses the token you issue to your customer to determine their identity 
 
 # 5. Encryption and Data Protection
 
-Encryption protects from sniffing and tampering. Encryption is vital to security.
+Encryption protects from sniffing and tampering, and is vital to security.
 
 * WebRTC enforces encryption over the connection
 * PulseBeam enforces encryption for traffic through our services
@@ -152,7 +162,7 @@ Read more on DTLS and SRTP in WebRTC for the Curious and the standards.
 
 ## 5.2 Signaling Security
 
-* All PulseBeam signaling traffic is encrypted using HTTPS
+* PulseBeam uses HTTPS to encrypt all signaling traffic
 * Signaling uses Token validation for all resource access
 * Tokens ensures only users whom you issued tokens to can participate in connections.
 * This protects customer data like SDPs
@@ -163,7 +173,7 @@ You can conceptualize the TURN server as an intermediary router between the two 
 
 PulseBeam TURN servers cannot decode application-level data because encryption on all communication is a mandatory in WebRTC. Only the two peers participating in the call have ability to decrypt.
 
-Resultantly, the protections put in place through encryption are not compromised during WebRTC communication over TURN. The server is unable to decode application-level data, it cannot understand or modify information that peers send to each other. Ensuring encryption and privacy remains intact during relay.
+WebRTC connections over an intermediary TURN server do not compromise encryption. The server is unable to decode application-level data, it cannot understand or modify information that peers send to each other. Ensuring encryption and privacy remains intact during relay.
 
 Our TURN servers by default only relay traffic as a backup for routing purposes when peer network infrastructure prevents a direct peer to peer connection.
 
@@ -207,22 +217,24 @@ We encourage developers to adopt secure practices, especially for applications h
 
 * Encrypting your traffic using secure encryption protocols for all client communications.
 * Implement proper user authentication
+* 1:1 relationship between people and PulseBeam accounts.
 * Pre-registering users or requiring authentication before allowing participation in connections.
-* Clearly communicating permission requests to users to prioritize privacy. Privacy and User Consent recommend to highlight to the user what permission they are giving
+* Authenticate and authorize users before providing them with tokens.
 * Implement short token TTL
 * Secure token transmission
-* Regular key rotation
+* Regular key rotation - 90 days may be a good timeline for you
 * Strict policy configuration
+* Communicating permission requests to users to prioritize privacy and user consent highlighting to the user what permission they are giving
 * Follow secure coding practices
-* Monitor for suspicious activities
+* Monitor for suspicious activities - Some examples of monitoring suspicious activity include: monitoring accounts, DAU, auditing account data, or usage in your own or PulseBeam metrics dashboard. Logs of peer's ID and groups and who they are connecting to. Ensuring logs are in line with your expected application logic.
 
 ## 8. Conclusion
 
-PulseBeam's security provides a robust foundation to secure real-time communications. PulseBeam leverages WebRTC's security features and supplements them with additional protections to deliver a secure, reliable communication platform.  By following our shared responsibility model and implementing recommended security practices, you can ensure a high level of security for your applications and users.
+PulseBeam's security provides a robust foundation to secure real-time communications. PulseBeam leverages WebRTC's security features and supplements them with additional protections to deliver a secure, reliable communication platform. By following our shared responsibility model and implementing recommended security practices, you can ensure a high level of security for your applications and users.
 
 # Learn more
 
-Contact us for questions
+Contact us for questions.
 
 Read more:
 
