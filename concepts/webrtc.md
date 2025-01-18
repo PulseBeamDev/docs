@@ -13,6 +13,8 @@ A similar relationship would be the one between HTTP and the Fetch API. WebRTC t
 
 The WebRTC protocol is available in other APIs and languages besides JavaScript. You can find servers and domain-specific tools as well for WebRTC. All of these implementations use the WebRTC protocol so that they can interact with each other.
 
+The WebRTC open source standard is somewhat split in “ownership” between the W3C and the IETF. W3C is in charge of the API surface we use in the browser for WebRTC and the IETF on the network protocol itself – what gets sent over the network.
+
 ## Why use WebRTC?
 
 These are some of the things that WebRTC will give you:
