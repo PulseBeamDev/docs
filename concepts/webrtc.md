@@ -1,10 +1,9 @@
 ---
 title: WebRTC
 description: Understanding WebRTC
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
-
-# What is WebRTC?
 WebRTC is an open-source API and Protocol which enables real-time communication of audio, video and data in any manner of apps.
 
 WebRTC, short for Web Real-Time Communication, is both an API and a Protocol. The WebRTC protocol is a set of rules for two WebRTC agents to negotiate bidirectional secure real-time communication. The WebRTC API then allows developers to use the WebRTC protocol. The WebRTC API is specified only for JavaScript.
@@ -13,9 +12,7 @@ A similar relationship would be the one between HTTP and the Fetch API. WebRTC t
 
 The WebRTC protocol is available in other APIs and languages besides JavaScript. You can find servers and domain-specific tools as well for WebRTC. All of these implementations use the WebRTC protocol so that they can interact with each other.
 
-The WebRTC open source standard is somewhat split in “ownership” between the W3C and the IETF. W3C is in charge of the API surface we use in the browser for WebRTC and the IETF on the network protocol itself – what gets sent over the network.
-
-## Why use WebRTC?
+# Why use WebRTC?
 
 These are some of the things that WebRTC will give you:
 
@@ -26,7 +23,9 @@ These are some of the things that WebRTC will give you:
 * Repurposed existing technology (battle-tested)
 * Congestion control (complicated)
 
-PulseBeam wraps WebRTC and provides infrastructure. Including signaling, STUN, and TURN servers. It abstracts the complexities of managing connections, handling edge cases, and working with WebRTC APIs. With the PulseBeam Peer JS SDK, developers call `peer.start()` to initialize connections and `peer.connect(otherPeer)` to establish and reconnect peers seamlessly. So you get everything in WebRTC, without the large upfront investment, testing, maintenance, and ongoing complexity.
+# What does PulseBeam add?
+
+PulseBeam wraps WebRTC, defines a secure signaling protocol, and provides infrastructure. Including signaling, STUN, and TURN servers. It abstracts the complexities of managing connections, handling edge cases, and working with WebRTC APIs. With the `@pulsebeam/peer` JS SDK, developers call `peer.start()` to initialize connections and `peer.connect(otherPeer)` to establish and reconnect peers seamlessly. So you get everything in WebRTC, without the large upfront investment, testing, maintenance, and ongoing complexity.
 
 # The WebRTC Protocol
 
@@ -74,35 +73,33 @@ ICE enables direct connection, but the real magic of the connecting process invo
 
 STUN (Session Traversal Utilities for NAT) is a protocol to tell you your public IP address/port and to determine any restrictions in your router that would prevent a direct connection. TURN (Traversal Using Relays around NAT) is a protocol for relaying network traffic when a direct connection cannot be established between two peers. For example, when STUN determined one peer is behind a symmetric NAT, a TURN server is needed to relay the traffic between peers. 
 
-PulseBeam provides STUN and TURN servers. TURN supports: TURN over UDP (~76% of TURN connections), TURN TCP (~20%).
+PulseBeam provides STUN and TURN servers. PulseBeam TURN supports: TURN over UDP (~76% of TURN connections), TURN TCP (~20%).
 
 When the two agents have successfully established an ICE connection, WebRTC moves on to the next step; establishing an encrypted transport for sharing audio, video, and data between them.
 
+Now that we have bidirectional communication (via ICE). 
+
 ### Securing the transport layer with DTLS and SRTP
 
-Now that we have bidirectional communication (via ICE), we need to make our communication secure! This is done through two more protocols that also pre-date WebRTC; DTLS (Datagram Transport Layer Security) and SRTP (Secure Real-Time Transport Protocol). The first protocol, DTLS, is simply TLS over UDP (TLS is the cryptographic protocol used to secure communication over HTTPS). The second protocol, SRTP, is used to ensure encryption of RTP (Real-time Transport Protocol) data packets.
+Encryption makes our communication secure. It protects the data being sent over the connection from sniffing and tampering, is vital to security and is a mandatory in WebRTC. 
 
-First, WebRTC connects by doing a DTLS handshake over the connection established by ICE. Unlike HTTPS, WebRTC doesn't use a central authority for certificates. It simply asserts that the certificate exchanged via DTLS matches the fingerprint shared via signaling. This DTLS connection is then used for DataChannel messages.
-
-Next, WebRTC uses the RTP protocol, secured using SRTP, for audio/video transmission. We initialize our SRTP session by extracting the keys from the negotiated DTLS session.
-
-We will discuss why media and data transmission have their own protocols in a later chapter, but for now it is enough to know that they are handled separately.
-
-Now we are done! We have successfully established bidirectional and secure communication. If you have a stable connection between your WebRTC agents, this is all the complexity you need. In the next section, we will discuss how WebRTC deals with the unfortunate real world problems of packet loss and bandwidth limits.
+See our related [Security](security-and-architecture#webrtc-mediadata-encryption) section for more information on the DTLS and SRTP protocols.
 
 ### Communicating with peers via RTP and SCTP
 
+We will discuss how WebRTC deals with the unfortunate real world problems of packet loss and bandwidth limits.
+
 Now that we have two WebRTC agents connected and secure, bidirectional communication established, let's start communicating! Again, WebRTC will use two pre-existing protocols: RTP (Real-time Transport Protocol), and SCTP (Stream Control Transmission Protocol). We use RTP to exchange media encrypted with SRTP, and we use SCTP to send and receive DataChannel messages encrypted with DTLS.
 
-RTP is quite a minimal protocol, but it provides the necessary tools to implement real-time streaming. The most important thing about RTP is that it gives flexibility to the developer, allowing them to handle latency, package loss, and congestion as they please. We will discuss this further in the media chapter.
+RTP is quite a minimal protocol, but it provides the necessary tools to implement real-time streaming. The most important thing about RTP is that it gives flexibility to the developer, allowing them to handle latency, package loss, and congestion as they please.
 
-The final protocol in the stack is SCTP. The important thing about SCTP is that you can turn off reliable and in order message delivery (among many different options). This allows developers to ensure the necessary latency for real-time systems.
+The final protocol in the stack is SCTP. The important thing about SCTP is that you can turn off reliable and in order message delivery (among many other options). This allows developers to ensure the necessary latency for real-time systems.
 
 ## WebRTC, a collection of protocols
 
 WebRTC solves a lot of problems. At first glance the technology may seem over-engineered, but the genius of WebRTC is its humility. It wasn't created under the assumption that it could solve everything better. Instead, it embraced many existing single purpose technologies and brought them together into a streamlined, widely applicable bundle.
 
-This allows us to examine and learn each part individually without being overwhelmed. A good way to visualize it is a 'WebRTC Agent' is really just an orchestrator of many different protocols.
+This allows us to examine and learn each part individually without being overwhelmed. A good way to visualize it is a 'WebRTC Agent' is as an orchestrator of many different protocols.
 
 ![WebRTC Agent](../../../../assets/01-webrtc-agent.png "WebRTC Agent Diagram")
 

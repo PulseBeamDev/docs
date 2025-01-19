@@ -3,8 +3,9 @@ title: Getting Started
 description: Overview of PulseBeam
 ---
 
-PulseBeam wraps WebRTC and provides infrastructure. Including signaling, STUN, and TURN servers. It abstracts the complexities of managing connections, handling edge cases, and working with WebRTC APIs. With the PulseBeam Peer JS SDK, developers call `peer.start()` to initialize connections and `peer.connect(otherPeer)` to establish and reconnect peers seamlessly. So you get everything in WebRTC, without the large upfront investment, testing, maintenance, and ongoing complexity.
+# What does PulseBeam add?
 
+PulseBeam wraps WebRTC, defines a secure signaling protocol, and provides infrastructure. Including signaling, STUN, and TURN servers. It abstracts the complexities of managing connections, handling edge cases, and working with WebRTC APIs. With the `@pulsebeam/peer` JS SDK, developers call `peer.start()` to initialize connections and `peer.connect(otherPeer)` to establish and reconnect peers seamlessly. So you get everything in WebRTC, without the large upfront investment, testing, maintenance, and ongoing complexity.
 
 google webrtc in the real world
 https://web.dev/articles/webrtc-infrastructure

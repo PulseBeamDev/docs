@@ -34,7 +34,7 @@ PulseBeam architecture consists of several key components:
 
 ## Typical Security Flow
 
-Explore our documentation for code samples. See Quick Start for a sample project using `@pulsebeam/server` and `@pulsebeam/peer` SDKs. See Reference for SDK documentation and more details.
+Explore our documentation for code samples. See [Quick Start](/docs/getting-started/quick-start/) for a sample project using `@pulsebeam/server` and `@pulsebeam/peer` SDKs. See Reference for [peer](/docs/reference/peer-js/) and [server](/docs/reference/server-js/) SDK documentation and more details.
 
 ### Initial Authentication
 
@@ -77,7 +77,7 @@ To improve your security profile, you should restrict permissions to the minimum
 * You define the security policy on the token. We enforce policies that you set on the token.
 * Security policies restrict which peer(s) the peer you minted the token for can connect to. 
 * We recommend more restrictive for higher security. To reduce potential impact of leaked tokens and prevent unintended usage.
-* You provide tokens to users, we recommend you authenticate users before providing them with tokens, to prevent spoofing and impersonation. See more in Authentication section.
+* You provide tokens to users, we recommend you authenticate users before providing them with tokens, to prevent spoofing and impersonation. See more in the [Authentication](#peer-authentication-identity-and-authorization) section.
 * You define a TTL on the token. We recommend shorter TTLS for higher security. As it reduces potential impact of leaked tokens
 * You should manage token lifecycle in your client. By monitoring token session expiration time and refreshing the token before it expires.
 * You can immediately invalidate all tokens minted by your key by deleting the key from your PulseBeam project. PulseBeam does not currently support individual token revocation.
@@ -156,6 +156,16 @@ A TURN server's purpose is simply the relay of WebRTC data between parties in a 
 DTLS-SRTP facilitates secure key exchanges, enabling detection of potential Man-in-the-Middle (MiTM) attacks.
 
 Read more on DTLS and SRTP in WebRTC for the Curious and the standards.
+
+This is done through two more protocols that also pre-date WebRTC; DTLS (Datagram Transport Layer Security) and SRTP (Secure Real-Time Transport Protocol). The first protocol, DTLS, is simply TLS over UDP (TLS is the cryptographic protocol used to secure communication over HTTPS). The second protocol, SRTP, is used to ensure encryption of RTP (Real-time Transport Protocol) data packets.
+
+First, WebRTC connects by doing a DTLS handshake over the connection established by ICE. Unlike HTTPS, WebRTC doesn't use a central authority for certificates. It simply asserts that the certificate exchanged via DTLS matches the fingerprint shared via signaling. This DTLS connection is then used for DataChannel messages.
+
+Next, WebRTC uses the RTP protocol, secured using SRTP, for audio/video transmission. We initialize our SRTP session by extracting the keys from the negotiated DTLS session.
+
+We will discuss why media and data transmission have their own protocols in a later chapter, but for now it is enough to know that they are handled separately.
+
+Now we are done! We have successfully established bidirectional and secure communication. If you have a stable connection between your WebRTC agents, this is all the complexity you need. In the next section, 
 
 ## Signaling Security
 
