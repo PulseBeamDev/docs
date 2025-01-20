@@ -36,7 +36,7 @@ npm run start
 * On the second tab enter peer-29 in the first text box. Then click connect.
 * Type text in the bottom text box. Changes will synchronize between peers in real-time using WebRTC data channels.
 
-<iframe id="ytplayer" type="text/html" title="YouTube video player Quickstart Successful Output" width="720" height="405"
+<iframe style="height: 480px;" id="ytplayer" type="text/html" title="YouTube video player Quickstart Successful Output" width="2000" height="1000"
 src="https://www.youtube.com/embed/Y9mKCrlLu7k?si=HDNMFjK6LaXSy61X?loop=1&modestbranding=1&playsinline=1&color=white&iv_load_policy=3"
 frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 

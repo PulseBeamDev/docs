@@ -1,8 +1,13 @@
+---
+title: README
+description: README for docs repo
+---
+
 # PulseBeam Docs
 
 ## **[Visit our docs →](https://pulsebeam.dev/docs)**
 
-## Have feedback for our documentation? Open an issue
+## Have feedback for our documentation? Contribute or open an issue
 
 Our documentation is open source to stay connected with our community and quickly implement feedback. Whether you've opened an issue to provide feedback or contributed your own content, we thank you for helping us maintain high-quality documentation.
 
@@ -14,7 +19,7 @@ To view your changes, use a markdown renderer. When you're ready, submit a PR.
 
 This project uses Astro Starlight for rendering.
 
-If you'd like to add or modify diagrams, feel free to submit a [Mermaid](https://mermaid.js.org/intro/) file.
+If you'd like to add or modify diagrams, submit a [Mermaid](https://mermaid.js.org/intro/) file.
 
 ### Deployment
 
