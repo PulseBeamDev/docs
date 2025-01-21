@@ -222,18 +222,18 @@ By following these best practices, customers can protect the security of their a
 
 We encourage developers to adopt secure practices, especially for applications handling sensitive information. Best practices and recommendations include:
 
-* Encrypting your traffic using secure encryption protocols for all client communications.
-* Implement proper user authentication
-* 1:1 relationship between people and PulseBeam accounts.
-* Pre-registering users or requiring authentication before allowing participation in connections.
-* Authenticate and authorize users before providing them with tokens.
-* Implement short token TTL
-* Secure token transmission
-* Regular key rotation - 90 days may be a good timeline for you
-* Strict policy configuration
-* Communicating permission requests to users to prioritize privacy and user consent highlighting to the user what permission they are giving
-* Follow secure coding practices
-* Monitor for suspicious activities - Some examples of monitoring suspicious activity include: monitoring accounts, DAU, auditing account data, or usage in your own or PulseBeam metrics dashboard. Logs of peer's ID and groups and who they are connecting to. Ensuring logs are in line with your expected application logic.
+* <input type="checkbox" disabled /> Encrypting your traffic using secure encryption protocols for all client communications.
+* <input type="checkbox" disabled /> Implement proper user authentication
+* <input type="checkbox" disabled /> 1:1 relationship between people and PulseBeam accounts.
+* <input type="checkbox" disabled /> Pre-registering users or requiring authentication before allowing participation in connections.
+* <input type="checkbox" disabled /> Authenticate and authorize users before providing them with tokens.
+* <input type="checkbox" disabled /> Implement short token TTL
+* <input type="checkbox" disabled /> Secure token transmission
+* <input type="checkbox" disabled /> Regular key rotation - 90 days may be a good timeline for you
+* <input type="checkbox" disabled /> Strict policy configuration
+* <input type="checkbox" disabled /> Communicating permission requests to users to prioritize privacy and user consent highlighting to the user what permission they are giving
+* <input type="checkbox" disabled /> Follow secure coding practices
+* <input type="checkbox" disabled /> Monitor for suspicious activities - Some examples of monitoring suspicious activity include: monitoring accounts, DAU, auditing account data, or usage in your own or PulseBeam metrics dashboard. Logs of peer's ID and groups and who they are connecting to. Ensuring logs are in line with your expected application logic.
 
 # Conclusion
 
@@ -241,14 +241,12 @@ PulseBeam's security provides a robust foundation to secure real-time communicat
 
 # Learn more
 
-Contact us for questions.
+[Contact us](/docs/community-and-support/discord/) for questions
 
 Read more:
 
-https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity
-
-https://webrtcforthecurious.com/docs/04-securing/
-
-https://web.dev/articles/webrtc-basics#toc-security
-
-https://bloggeek.me/is-webrtc-safe/
+* [Google WebRTC Blog - Security Basics](https://web.dev/articles/webrtc-basics#security)
+* [WebRTC Connectivity](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
+* [WebRTC for the Curious - Security](https://webrtcforthecurious.com/docs/04-securing/)
+* [Blog - Discussion on WebRTC Security](https://bloggeek.me/is-webrtc-safe/)
+* [IETF - RFC 8827 - WebRTC Security Architecture](https://www.rfc-editor.org/rfc/rfc8827.html)

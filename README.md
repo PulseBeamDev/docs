@@ -25,7 +25,7 @@ If you'd like to add or modify diagrams, submit a [Mermaid](https://mermaid.js.o
 
 Our docs are deployed as a submodule in a private repo. Every commit merged to this repo is manually pulled to the private repo then automatically deployed to [pulsebeam.dev/docs](https://pulsebeam.dev/docs).
 
-If you don't see your changes after a merge, please contact us for an update.
+If you don't see your changes after a merge, please [contact us](/docs/community-and-support/discord/) for an update.
 
 ## 👀 Want to learn more?
 

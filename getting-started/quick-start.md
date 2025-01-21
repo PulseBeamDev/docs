@@ -48,4 +48,4 @@ You’ve set up a real-time peer-to-peer connection using PulseBeam. Checkout 'w
 * Check your environment variables with `echo $PULSEBEAM_API_KEY && echo $PULSEBEAM_API_SECRET`
 * Port 3000 is already in use (`Error: listen EADDRINUSE: address already in use :::3000`) close other process or change port.
 * Something odd? Check you node version with `node -v` and `npm -v`. If older than 23.5.0 & 11.0.0 try `nvm use node` or `nvm use 23.5`
-* Something else? Checkout logs in browser console.
+* Something else? Checkout logs in browser console or [contact us](/docs/community-and-support/discord/)!
