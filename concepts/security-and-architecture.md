@@ -246,7 +246,8 @@ PulseBeam's security provides a robust foundation to secure real-time communicat
 Read more:
 
 * [Google WebRTC Blog - Security Basics](https://web.dev/articles/webrtc-basics#security)
-* [WebRTC Connectivity](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
+* [WebRTC's docs - Connection establishment, technical and detailed. 'How' behind the steps](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
 * [WebRTC for the Curious - Security](https://webrtcforthecurious.com/docs/04-securing/)
 * [Blog - Discussion on WebRTC Security](https://bloggeek.me/is-webrtc-safe/)
 * [IETF - RFC 8827 - WebRTC Security Architecture](https://www.rfc-editor.org/rfc/rfc8827.html)
+* [IETF - RFC 8827 - Security Considerations for WebRTC](https://datatracker.ietf.org/doc/rfc8827/)

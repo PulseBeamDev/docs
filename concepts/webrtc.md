@@ -143,18 +143,21 @@ DataChannels can be configured to prioritize real time (lossy) or reliable (larg
 
 # Further Reading
 
-https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API
+[WebRTC's docs - landing page](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)
 
-https://webrtc.org/
+[WebRTC's docs - Connection lifecycle, from establishment to closure. 'Why' behind the steps](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Session_lifetime)
 
-https://webrtcforthecurious.com/
+[WebRTC's docs - Connection establishment, technical and detailed. 'How' behind the steps](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity)
 
-https://codelabs.developers.google.com/codelabs/webrtc-web
+[Google's WebRTC landing page](https://webrtc.org/)
 
-https://www.w3.org/TR/webrtc/
+[WebRTC for the Curious - open source book](https://webrtcforthecurious.com/)
 
-https://datatracker.ietf.org/wg/rtcweb/documents/ 
+[Google's good generic WebRTC tutorial (non-PulseBeam)](https://codelabs.developers.google.com/codelabs/webrtc-web)
 
+[W3C WebRTC Web API and Browser Standard](https://www.w3.org/TR/webrtc/)
+
+[IETF WebRTC Protocol Standard](https://datatracker.ietf.org/wg/rtcweb/documents/) 
 
 ---
 
