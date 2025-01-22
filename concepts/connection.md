@@ -12,30 +12,11 @@ peer.connect(otherPeer);
 
 ## Connection State
 
-To build responsive UIs that adapt to dynamic network, connection, and state conditions, you likely want to know the connection state.
-
-There are two kinds of state to be aware of: 
-* **PulseBeam Peer State** - JS SDK Peer object's state
-* **RTCPeerConnectionState** - Underlying WebRTC Peer connection state
+To build responsive UIs that adapt to dynamic network, connection, and state conditions, you need to know the connection state. Specifically, the **RTC Peer Connection State** describes this connection state, representing the underlying WebRTC Peer connection state.
  
-To learn about these states keep reading!
+### Accessing state
 
-### Accessing the state
-
-**PulseBeam Peer State**
-
-You can listen to PulseBeam's peer's state change with a callback `onstatechange` or get current state with `state()`:
-
-```js
-peer.onstatechange = (state) => {
-    console.log(`The peer state changed to: ${state}`);
-}
-console.log(`The peer's state is: ${peer.state()}`)
-```
-
-**RTCPeerConnectionState**
-
-Similarly, you can listen to underlying WebRTC connection state change with callback `onconnectionstatechange` or get current state `connectionstate()`:
+You can listen to underlying WebRTC connection state change with callback `onconnectionstatechange` or get current state `connectionstate()`:
 
 ```js
 peer.onsession = (session) => {
@@ -46,21 +27,17 @@ peer.onsession = (session) => {
 
 ### Understanding the State
 
-**PulseBeam Peer State**
-
-The PulseBeam State is straightforward. State is `new` or `closed`. When the state is `closed` peers must be recreated to transition back to `new`. State must be `new` to be able to make connections.
-
-**RTCPeerConnectionState**
-
 ![Connection state flowchart](../../../../assets/concepts.connection.svg)
 
 Note: This flowchart provides a high-level overview of typical behavior. It is meant to help you understand and conceptualize states and their meaning. WebRTC connections can exhibit unexpected transitions and/or flakiness. 
 
-Peer SDK insulates you from some flakiness in connection state, with shimming, polyfills, and auto retries on top of existing browser WebRTC implementation. Handling reconnection in recoverable states.
+Peer SDK insulates you from some flakiness in connection state, with shimming, polyfills, and auto retries on top of existing browser WebRTC implementation. As well as handling reconnection in recoverable states.
 
-If you have any comments or would like to [chat with us](/docs/community-and-support/discord)!
+If you have any questions or comments, [chat with us](/docs/community-and-support/discord)!
 
 #### Expected State Transition Flows
+
+Here are some expected UI flow snip bits. Here are how you should think about isolated sections of the connection sate
 
 **Connection Establishment Happy Path**
 
@@ -140,6 +117,25 @@ We would love to change this in the future. Likely next improvement would be to 
 TODO: Add a demo and sample code here.
 
 If there is enough interest from our community. So [share your thoughts!](/docs/community-and-support/discord)
+
+## PulseBeam Peer State
+
+For use cases including token invalidation, you can use **PulseBeam Peer State** defined in PulseBeam Peer JS SDK.
+
+**PulseBeam Peer State**
+
+You can listen to the Peer's state change with a callback `onstatechange`, get current state with `state()`, and transition to closed with `close()`:
+
+```js
+peer.onstatechange = (state) => {
+    console.log(`The peer state changed to: ${state}`);
+}
+console.log(`The peer's state is: ${peer.state()}`)
+```
+
+**PulseBeam Peer State**
+
+The PulseBeam State is `new` or `closed`. When the state is `closed` the Peer must be recreated to transition back to `new`. State must be `new` to be able to make connections.
 
 # Code Samples
 
