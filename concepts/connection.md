@@ -1,6 +1,7 @@
 ---
 title: Connection
 description: Understanding connections and lifecycle
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
 PulseBeam simplifies WebRTC connections, managing state, reconnections, and common edge cases. By abstracting the complexity, establishing a connection looks like:
@@ -29,7 +30,9 @@ peer.onsession = (session) => {
 
 ![Connection state flowchart](../../../../assets/concepts.connection.svg)
 
-Note: This flowchart provides a high-level overview of typical behavior. It is meant to help you understand and conceptualize states and their meaning. WebRTC connections can exhibit unexpected transitions and/or flakiness. 
+:::note
+This flowchart provides a high-level overview of typical behavior. It is meant to help you understand and conceptualize states and their meaning. WebRTC connections can exhibit unexpected transitions and/or flakiness. 
+:::
 
 Peer SDK insulates you from some flakiness in connection state, with shimming, polyfills, and auto retries on top of existing browser WebRTC implementation. As well as handling reconnection in recoverable states.
 
@@ -37,7 +40,7 @@ If you have any questions or comments, [chat with us](/docs/community-and-suppor
 
 #### Expected State Transition Flows
 
-Here are some expected UI flow snip bits. Here are how you should think about isolated sections of the connection sate
+Here are some expected UI flow snip bits. Here are how you should think about isolated sections of the connection state
 
 **Connection Establishment Happy Path**
 
@@ -85,7 +88,7 @@ By carefully mapping connection states to user-friendly labels and actionable UI
 
 We wish you the best and would love to chat and see what you build, [connect with us](/docs/community-and-support/discord)!
 
-## Handling Token TTL
+## Token State
 
 Tokens govern user access to PulseBeam's platform. Including session lifetime. 
 

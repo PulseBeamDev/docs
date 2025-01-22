@@ -1,6 +1,7 @@
 ---
 title: Terms
 description: Getting to know terms and glossary
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
 ### YOU/YOUR
