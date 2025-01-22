@@ -83,7 +83,7 @@ Now that we have bidirectional communication (via ICE).
 
 Encryption makes our communication secure. It protects the data being sent over the connection from sniffing and tampering, is vital to security and is a mandatory in WebRTC. 
 
-See our related [Security](security-and-architecture#webrtc-mediadata-encryption) section for more information on the DTLS and SRTP protocols.
+See our related [Security](/docs/concepts/security-and-architecture#webrtc-mediadata-encryption) section for more information on the DTLS and SRTP protocols.
 
 ### Communicating with peers via RTP and SCTP
 

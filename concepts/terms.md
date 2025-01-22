@@ -30,7 +30,7 @@ PulseBeam, us, the CPaaS provider
 
 ### KEYS
 
-Key pair(s) for your PulseBeam project [see key docs](docs/concepts/security-and-architecture/#pulsebeam-project-keys)
+Key pair(s) for your PulseBeam project [see key docs](/docs/concepts/security-and-architecture/#pulsebeam-project-keys)
 
 ### SECRETS/PRIVATE KEYS
 
