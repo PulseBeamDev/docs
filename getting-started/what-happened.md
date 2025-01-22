@@ -75,7 +75,7 @@ Experiment with the demo!
 
 ### Explore PulseBeam CLI
 
-Update frontend to work with PulseBeam CLI (https://pulsebeam.dev/docs/reference/cli/) instead of `/auth` for token generation. 
+Update frontend to work with [PulseBeam CLI](/docs/reference/cli/) instead of `/auth` for token generation. 
     <details>
     <summary>Hint: </summary>
     One way is to create another input for <code>token</code>, and add a <code>peer.start()</code> button.
