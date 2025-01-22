@@ -48,19 +48,17 @@ peer.onsession = (session) => {
 
 **PulseBeam Peer State**
 
-The PulseBeam State is straightforward, it is `new` or `closed`. When the state is `closed` peers must be recreated to transition back to `new` to be able to make connections.
+The PulseBeam State is straightforward. State is `new` or `closed`. When the state is `closed` peers must be recreated to transition back to `new`. State must be `new` to be able to make connections.
 
 **RTCPeerConnectionState**
 
 ![Connection state flowchart](../../../../assets/concepts.connection.svg)
 
-We, PulseBeam does some shimming, polyfills, and auto retrys on top of existing browser WebRTC implementation. 
+Note: This flowchart provides a high-level overview of typical behavior. It is meant to help you understand and conceptualize states and their meaning. WebRTC connections can exhibit unexpected transitions and/or flakiness. 
 
-Note: this is slightly oversimplified. You will observe unexpected transitions and/or flakiness in WebRTC states. This diagram is meant to help you understand and conceptualize states and their meaning.
+Peer SDK insulates you from some flakiness in connection state, with shimming, polyfills, and auto retries on top of existing browser WebRTC implementation. Handling reconnection in recoverable states.
 
-Peer SDK insulates you from some flakiness in connection state and handles reconnection in recoverable states.
-
-Note: While PulseBeam provides a stable abstraction, WebRTC connection states can exhibit unexpected transitions or flakiness. This flowchart provides a high-level overview of typical behavior.
+If you have any comments or would like to [chat with us](/docs/community-and-support/discord)!
 
 #### Expected State Transition Flows
 
@@ -131,12 +129,11 @@ When a token expires and the user wants to maintain a connection, you should rec
 * Reinitialize peers upon token refresh.
 * Handle reconnections gracefully during token transitions to avoid disrupting user experiences.
 
-
 **What happens when tokens expire during an active session?**
 
 The connection will be closed
 
-**Next Steps**
+**PulseBeam's Next Steps**
 
 We would love to change this in the future. Likely next improvement would be to add hooks for token refresh.
 
@@ -146,8 +143,7 @@ If there is enough interest from our community. So [share your thoughts!](/docs/
 
 # Code Samples
 
-* [React Demo](https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react/src)
-* [Full Stack Demo](https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-cdn/src)
+* [React Demo](https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react)
 
 # Learn More
 
