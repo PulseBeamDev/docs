@@ -30,7 +30,7 @@ PulseBeam architecture consists of several key components:
 * **Signaling Servers**: PulseBeam servers facilitating connection establishment. For Alice and Bob's connection.
 * **STUN/TURN Servers**: PulseBeam network traversal and relay services. For Alice and Bob's alternate path
 * **Authentication Services**: Token-based access control system. Issued by you, for Alice and Bob to use PulseBeam. 
-* **WebRTC Media Layer**: Peer-to-peer encrypted communication channels. Real-time data transmission for Alice and Bob to communicate.
+* **WebRTC Communication**: Peer-to-peer encrypted communication channels. Real-time data transmission for Alice and Bob to communicate.
 
 ## Typical Security Flow
 
@@ -43,8 +43,8 @@ Explore our documentation for code samples. See [Quick Start](/docs/getting-star
 1. Customers hit your server/serverless endpoint hosting tokens
 1. Your endpoint uses PulseBeam Credentials with our `@pulsebeam/server` SDK to generate tokens for your customers
 1. Encrypt all traffic on your endpoint (e.g. HTTPS) so tokens are safe in transit.
-1. We recommend you authenticate Customers before issuing them tokens. You may want to authorize them as well.
-1. Note: Tokens are intended to be transient, directly returned to the client. You do not need to store them.
+1. We recommend you authenticate customers before issuing them tokens. You may want to authorize them as well.
+1. Note: Tokens are intended to be transient, directly returned to the client.
 
 ### User Session Establishment
 
@@ -58,7 +58,6 @@ Explore our documentation for code samples. See [Quick Start](/docs/getting-star
 1. PulseBeam Signaling services operates over HTTPS and establish WebRTC connections.
 1.  WebRTC enforces encryption of all communication (e.g. media and data streams) over every connection
 1. When direct peer to peer fails due to customer network restrictions (e.g. firewall), PulseBeam TURN servers relay encrypted traffic without ability to decode customer data.
-
 
 # Security Features and Controls
 
@@ -134,7 +133,7 @@ Encryption protects from sniffing and tampering, and is vital to security.
 * WebRTC enforces encryption over the connection
 * PulseBeam enforces encryption for traffic through our services
 
-We recommend encrypting communications between your services and customers. This greatly improves your security profile. 
+We recommend encrypting communications between your services and customers. This greatly improves your security profile.
 
 ## WebRTC Media/Data Encryption
 
@@ -155,7 +154,7 @@ A TURN server's purpose is simply the relay of WebRTC data between parties in a 
 
 DTLS-SRTP facilitates secure key exchanges, enabling detection of potential Man-in-the-Middle (MiTM) attacks.
 
-Read more on DTLS and SRTP in WebRTC for the Curious and the standards.
+Read more on DTLS and SRTP in [WebRTC for the Curious](https://webrtcforthecurious.com/docs/04-securing/) and [the standards](https://datatracker.ietf.org/doc/rfc8827/).
 
 This is done through two more protocols that also pre-date WebRTC; DTLS (Datagram Transport Layer Security) and SRTP (Secure Real-Time Transport Protocol). The first protocol, DTLS, is simply TLS over UDP (TLS is the cryptographic protocol used to secure communication over HTTPS). The second protocol, SRTP, is used to ensure encryption of RTP (Real-time Transport Protocol) data packets.
 
@@ -165,14 +164,14 @@ Next, WebRTC uses the RTP protocol, secured using SRTP, for audio/video transmis
 
 We will discuss why media and data transmission have their own protocols in a later chapter, but for now it is enough to know that they are handled separately.
 
-Now we are done! We have successfully established bidirectional and secure communication. If you have a stable connection between your WebRTC agents, this is all the complexity you need. In the next section, 
+Now we are done! We have successfully established bidirectional and secure communication. If you have a stable connection between your WebRTC agents.
 
 ## Signaling Security
 
 * PulseBeam uses HTTPS to encrypt all signaling traffic
 * Signaling uses Token validation for all resource access
 * Tokens ensures only users whom you issued tokens to can participate in connections.
-* This protects customer data like SDPs
+* This protects user data like SDPs
 
 ## TURN / STUN Security
 

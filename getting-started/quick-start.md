@@ -5,20 +5,28 @@ description: Getting Started with Pulsebeam
 
 ## What are we going to do?
  
-* Create **real-time text editor** between two peers
-* Account setup. 
-* Run a demo locally. 
+ Create **real-time text editor** between two peers.
+
+1. Account setup. 
+1. Run a demo locally. 
 
 Let's get started.
 
 ## 1. Your Account
-Sign up for a PulseBeam account to get an `api_key` and `api_secret`
+
+Sign up for a PulseBeam account and get an `api_key` and `api_secret`.
+
+1. Go to [pulsebeam.dev](https://pulsebeam.dev) 
+1. Create and account if you don't have one
+1. Create a project, name your project
+1. Create a keypair on your project, give your keypair a name, e.g. demokey
+1. Store those keys!
 
 ## 2. Serve
 
 Now that you’ve created your account and obtained your API credentials, let’s set up your local development environment.
 
-You will need `npm` and `node.js` installed on your system <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target="_blank">see here for installation instructions</a>
+You will need `npm` and `node.js` installed on your system. If you don't have them, see <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target="_blank">installation instructions</a>
 
 ```bash
 git clone git@github.com:PulseBeamDev/pulsebeam-js.git

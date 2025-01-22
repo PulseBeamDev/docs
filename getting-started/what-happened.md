@@ -63,10 +63,9 @@ peer → peer.connect('peer-29') → PulseBeam Signaling Servers → connected
 
 Logs can be viewed from your console browser inspector.
 
-PulseBeam will work globally within the scope of your `app-id`.
+PulseBeam will work globally within the scope of your project.
 * Peers are not limited to two tabs within the same browser.
 * You can establish a connection between peers on different networks or machines.
-
 
 We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/community-and-support/discord/)!
 

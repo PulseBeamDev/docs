@@ -105,7 +105,7 @@ This allows us to examine and learn each part individually without being overwhe
 
 # WebRTC API
 
-WebRTC API enables Web apps to capture and optionally stream audio and/or video media, as well as to exchange arbitrary data between browsers. Enabling data sharing peer-to-peer, without requiring that the user install plug-ins or any other third-party software.
+WebRTC API enables Web apps to use the WebRTC Protocol, capture and optionally stream audio and/or video media, as well as to exchange arbitrary data between browsers. Enabling data sharing peer-to-peer, without requiring that the user install plug-ins or any other third-party software.
 
 The WebRTC API spec is documented in the W3C as [webrtc](https://www.w3.org/TR/webrtc/).
 
