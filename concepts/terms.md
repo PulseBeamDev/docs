@@ -18,7 +18,7 @@ Refers to the intended reader, developers using PulseBeam CPaaS. You log in to t
 
 ### APPLICATION/PROJECT
 
-the app you are creating with PulseBeam. For project creation see admin console and [Quickstart](/docs/getting-started/quick-start). For project concepts see [Project Access](/docs/concepts/security-and-architecture/#project-access-control)
+the app you are creating with PulseBeam. For project creation see [admin console](https://cloud.pulsebeam.dev/oidc) and [Quickstart](/docs/getting-started/quick-start). For project concepts see [Project Access](/docs/concepts/security-and-architecture/#project-access-control)
 
 ### PEER/CUSTOMER/USER/END-USER
 
@@ -50,15 +50,15 @@ Refers to the targets of the connection and the path of data flow over the conne
 
 ### WEBRTC/WEBRTC AGENT
 
-WebRTC, short for Web Real-Time Communication, defines a protocol for two WebRTC agents to negotiate bidirectional secure real-time communication connection. Learn more [here](/docs/concepts/webrtc)
+WebRTC, short for Web Real-Time Communication, defines a protocol for two WebRTC agents to negotiate a bidirectional secure real-time communication connection. Learn more [here](/docs/concepts/webrtc)
 
 ### SIGNALING
 
-When Alice goes to their browser, WebRTC Agent in the browser, has no idea who it is going to communicate with or what they are going to communicate about. Signaling performs this discovery, bootstrapping the connection. Learn more about [signaling in WebRTC](/docs/concepts/webrtc/#signaling-how-peers-find-each-other-in-webrtc) and [PulseBeam's signaling security](/docs/concepts/security-and-architecture/#signaling-security)
+When Alice goes to their browser, the WebRTC Agent in the browser, has no idea who it is going to communicate with. Signaling performs this discovery, bootstrapping the connection. Learn more about [signaling in WebRTC](/docs/concepts/webrtc/#signaling-how-peers-find-each-other-in-webrtc) and [PulseBeam's signaling security](/docs/concepts/security-and-architecture/#signaling-security)
 
 ### STUN
 
-In order to connect the peers, Signaling needs to know the address of the peers, but because of networking infrastructure, often peers don't know their own address. STUN servers exist to echo back a peer's address to itself. Read more about STUN [here](/docs/concepts/security-and-architecture/#turn--stun-security) and [here](/docs/concepts/webrtc/#connecting-and-nat-traversal-with-stunturn)
+In order to connect the peers, Signaling needs to know the address (IP) of the peers, but because of networking infrastructure, often peers don't know their own address. STUN servers echo back a peer's address to itself. Read more about STUN [here](/docs/concepts/security-and-architecture/#turn--stun-security) and [here](/docs/concepts/webrtc/#connecting-and-nat-traversal-with-stunturn)
 
 ### TURN/RELAY
 
