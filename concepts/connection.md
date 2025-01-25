@@ -17,6 +17,10 @@ To build responsive UIs that adapt to dynamic network, connection, and state con
  
 ### Accessing state
 
+In a web application using `@pulsebeam/peer` SDK, open you app, open browser console, make sure logs are verbose, create a connection, search for `connectionstate`. 
+
+To test various network condition, create and manipulate the state, you can turn on airplane mode for various amounts of time, closing tabs, setting packet loss on your system, and much more, experiment! 
+
 You can listen to underlying WebRTC connection state change with callback `onconnectionstatechange` or get current state `connectionstate()`:
 
 ```js
