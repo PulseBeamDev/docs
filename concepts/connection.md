@@ -119,9 +119,7 @@ The connection will be closed
 
 **PulseBeam's Next Steps**
 
-We would love to change this in the future. Likely next improvement would be to add hooks for token refresh.
-
-TODO: Add a demo and sample code here.
+We would love to change this in the future. Likely next improvement would be to add a demo and sample code here. Then next would be to add hooks for token refresh.
 
 If there is enough interest from our community. So [share your thoughts!](/docs/community-and-support/discord)
 

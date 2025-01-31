@@ -100,6 +100,8 @@ If issues persist:
 - Use modern, updated browsers and dependencies
 - Implement error handling in your application
 
+## We are missing something? [Contact us](/docs/community-and-support/discord/)
+
 ---
 
 **Note**: This guide is a living document. Always refer to the latest version in official documentation.
