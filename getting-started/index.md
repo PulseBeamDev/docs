@@ -4,7 +4,9 @@ description: Overview of PulseBeam
 tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
-## TL;DR: Open-Source WebRTC platform built for Engineers
+## Open-Source WebRTC platform built for Engineers
+
+## TL;DR: Features
 
 **Full native WebRTC control without the upfront investment, maintenance, and ongoing complexity.**
 
@@ -15,6 +17,8 @@ tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 * 🚀 **Production-ready SDK** own less than 100 lines of code
 * 🛠️ **Actively maintained** OSS stack (no abandoned projects)
 * 🌐 **Global STUN/TURN network** free STUN, usage-based TURN
+
+---
 
 ## 💡 What WebRTC Infrastructure Problem?
 
@@ -91,7 +95,7 @@ For browser clients, if your user has the compute, you can use AI Edge models bu
 
 #### Is Signaling hard?
 
-For production applications to survive, signaling takes some serious consideration. Daniel Petersson, a Google Duo[^1] Engineer has a great [talk about building scalable signaling](https://www.youtube.com/watch?v=nPnWIuAlphc) for a WebRTC production service.
+For production applications to survive, signaling takes some serious consideration. Daniel Petersson, a Google Duo Engineer has a great [talk about building scalable signaling](https://www.youtube.com/watch?v=nPnWIuAlphc) for a WebRTC production service.
 
 PulseBeam was designed for production applications at scale and to operate for your clients on unreliable networks for fast connections and reconnections.
 
@@ -138,6 +142,3 @@ When communications is not your core:
 While PulseBeam is still early days, we're creating a community of developers building the future of real-time communication. Whether you’re creating a video chat app, a live collaboration tool, or a multiplayer game, PulseBeam has your back.
 
 We're here to keep you productive for the long haul. [Join our Discord](/docs/community-and-support/discord/) if you need help, want to chat, or are thinking of a new feature. We're here to help - and to make PulseBeam even better.
-
----
-[^1]: Duo has since been merged into Google Meet

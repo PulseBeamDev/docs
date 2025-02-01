@@ -5,7 +5,7 @@ description: Getting Started with Pulsebeam
 
 ## What are we going to do?
  
- Create **real-time text editor** between two peers.
+Create **real-time text editor** between two peers.
 
 1. Account setup. 
 1. Run a demo locally. 

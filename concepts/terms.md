@@ -6,19 +6,7 @@ tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 
 ### YOU/YOUR
 
-Refers to the intended reader, developers using PulseBeam CPaaS. You log in to the admin console and get keys to write web applications. You use `@pulsebeam/server` and `@pulsebeam/peer` SDKs to create applications.
-
-### PULSEBEAM SDK CLIENT
-
-`@pulsebeam/peer` JS Client SDK for creating WebRTC connections with PulseBeam from web clients [see SDK Docs](/docs/reference/peer-js)
-
-### PULSEBEAM SDK SERVER
-
-`@pulsebeam/server` SDK for generating tokens to allow your clients to use your PulseBeam Project [see SDK Docs](/docs/reference/server-js)
-
-### APPLICATION/PROJECT
-
-the app you are creating with PulseBeam. For project creation see [admin console](https://cloud.pulsebeam.dev/oidc) and [Quickstart](/docs/getting-started/quick-start). For project concepts see [Project Access](/docs/concepts/security-and-architecture/#project-access-control)
+Refers to the intended reader, developers using PulseBeam CPaaS. You log in to the [admin console](https://cloud.pulsebeam.dev/) and get [keys](/docs/concepts/terms#keys) to create [applications](/docs/concepts/terms#applicationproject). You use `@pulsebeam/server` and `@pulsebeam/peer` SDKs to create applications.
 
 ### PEER/CUSTOMER/USER/END-USER
 
@@ -28,13 +16,25 @@ Your user. E.g. Alice and Bob the intended audience for your application
 
 PulseBeam, us, the CPaaS provider
 
+### PULSEBEAM SDK CLIENT
+
+`@pulsebeam/peer` JS Client SDK for creating [WebRTC](/docs/concepts/terms#webrtcwebrtc-agent) connections with PulseBeam from web clients [see SDK Docs](/docs/reference/peer-js)
+
+### PULSEBEAM SDK SERVER
+
+`@pulsebeam/server` SDK for generating [tokens](/docs/concepts/terms#token) to allow your clients to use your [PulseBeam Project](/docs/concepts/terms#applicationproject) [see SDK Docs](/docs/reference/server-js)
+
+### APPLICATION/PROJECT
+
+The app you are creating with PulseBeam. For project creation see [admin console](https://cloud.pulsebeam.dev/) and [Quickstart](/docs/getting-started/quick-start). For more on project concepts [see here](/docs/concepts/security-and-architecture/#project-access-control)
+
 ### KEYS
 
-Key pair(s) for your PulseBeam project [see key docs](/docs/concepts/security-and-architecture/#pulsebeam-project-keys)
+Key pair(s) for your PulseBeam project. Key pairs are for paid plan users to provide peers access to PulseBeam Cloud. [To learn more, see key docs](/docs/concepts/security-and-architecture/#pulsebeam-project-keys)
 
 ### SECRETS/PRIVATE KEYS
 
-The private key in the asymmetric key set provided by PulseBeam to you
+The private key in the asymmetric key set provided by PulseBeam to you.
 
 ### CONNECT/CONNECTION
 
@@ -42,7 +42,9 @@ The link created by PulseBeam between Alice and Bob. This link is for secure dat
 
 ### REAL-TIME
 
-End-to-end latency of data sent over the connection will usually be 50-200ms (Same as telephone call latency)(which is sufficient to be perceived by human users as real-time). This is achieved through various [WebRTC protocols](/docs/concepts/webrtc/#communicating-with-peers-via-rtp-and-sctp) which allows your software and projects to connect human and/or non-human systems, perform functions, and can respond to events within predictable and specific time constraints, time frame, or deadline. Latency can be higher, as networks and distances between peers are variable.
+End-to-end latency of data sent over the connection will usually be 50-200ms (Same as telephone call latency)(which is sufficient to be perceived by human users as real-time). 
+
+This is achieved through various [WebRTC protocols](/docs/concepts/webrtc/#communicating-with-peers-via-rtp-and-sctp) which allows your software and projects to connect human and/or non-human systems, perform functions, and can respond to events within predictable and specific time constraints, time frame, or deadline. Latency can be higher, as networks and distances between peers are variable.
 
 ### PEER-TO-PEER
 
@@ -66,14 +68,36 @@ In some cases, due to one or both peer's network firewalls and configuration, in
 
 ### TOKEN
 
-PulseBeam's access control system. Issued by you, for Alice and Bob to use PulseBeam infrastructure and resources. Read more about [security concepts](/docs/concepts/security-and-architecture). See [PulseBeam Server SDK](/docs/reference/server-js) and [PulseBeam CLI](/docs/reference/cli) for generating tokens.
+PulseBeam's access control system. Issued by you, for Alice and Bob to use PulseBeam infrastructure and resources. 
+
+For more security concepts, [go here](/docs/concepts/security-and-architecture). 
+
+To generate tokens, you need a [Key](/docs/concepts/terms#keys). For generating tokens, see [PulseBeam Server SDK](/docs/reference/server-js) and [PulseBeam CLI](/docs/reference/cli).
 
 ### POLICY
 
-`PeerPolicy` defines which peers this peer can connect to. You define the security policy on the token. We enforce policies that you set on the token. Learn about [concepts here](/docs/concepts/security-and-architecture/#customer-tokens-ttl-policies) and format and setting policies [here](https://jsr.io/@pulsebeam/server/doc/~/PeerPolicy).
+`PeerPolicy` defines which peers this peer can connect to. You define the security policy on the token. We enforce policies that you set on the [token](/docs/concepts/terms#token). Learn about [concepts here](/docs/concepts/security-and-architecture/#customer-tokens-ttl-policies) and format and setting policies [here](https://jsr.io/@pulsebeam/server/doc/~/PeerPolicy).
 
 ### PULSEBEAM CLI
 
-CLI vended by PulseBeam to allow you to generate tokens from your key without hosting a server. [See docs](/docs/reference/cli)
+CLI vended by PulseBeam to allow you to generate [tokens](/docs/concepts/terms#token) without hosting a server. [Read CLI docs](/docs/reference/cli)
+
+### PULSEBEAM CLOUD / PULSEBEAM SERVER
+
+Refers to PulseBeam's infrastructure / platform that is intended to be used by your [project](/docs/concepts/terms#applicationproject). This includes [Signaling](/docs/concepts/terms#signaling), [STUN](/docs/concepts/terms#stun), and [TURN](/docs/concepts/terms#turnrelay) servers / services. 
+
+[PulseBeam Admin Dashboard](https://cloud.pulsebeam.dev/) allows you to create [PulseBeam Project(s)](/docs/concepts/terms#applicationproject) and [key(s)](/docs/concepts/terms#keys) to access PulseBeam Cloud.
+
+### SELF-HOST
+
+Refers to the [open-source signaling server](https://github.com/PulseBeamDev/pulsebeam-server-lite) that we provide. You can use this in place of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server). We use this server in PulseBeam Cloud, so you can be sure it is working and maintained.
+
+### SANDBOX
+
+Free infrastructure we provide as community-shared signaling infrastructure. It is a free cloud-hosted version of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server).
+
+Currently, this is one dedicated server in one region. Choosing to run large volumes of traffic through can cause it to go down and prevent others from using it.
+
+Sandbox does not provide access to create [tokens](/docs/concepts/terms#token). To set [security policies](/docs/concepts/terms#policy) and TTL of tokens, you will need to mint tokens. To mint tokens, you will need to get a [Key](/docs/concepts/terms#keys).
 
 ## We are missing something? [Contact us](/docs/community-and-support/discord)
