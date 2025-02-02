@@ -90,7 +90,7 @@ Refers to PulseBeam's infrastructure / platform that is intended to be used by y
 
 ### SELF-HOST
 
-Refers to the [open-source signaling server](https://github.com/PulseBeamDev/pulsebeam-server-lite) that we provide. You can use this in place of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server). We use this server in PulseBeam Cloud, so you can be sure it is working and maintained.
+Refers to the [open-source signaling server](https://github.com/PulseBeamDev/pulsebeam-server-foss) that we provide. You can use this in place of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server). We use this server in PulseBeam Cloud, so you can be sure it is working and maintained.
 
 ### SANDBOX
 
