@@ -1,6 +1,7 @@
 ---
 title: Troubleshooting
 description: PulseBeam troubleshooting and debugging reccomendations
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
 PulseBeam is a flexible peer-to-peer WebRTC Communication Platform (CPaaS) designed to support:
@@ -47,6 +48,12 @@ Contact [PulseBeam Support](/docs/community-and-support/support/) we can debug a
 ## Connection Diagnostics
 
 Contact [PulseBeam Support](/docs/community-and-support/support/) we can debug and review issues with you. We're always working to improve your developer experience, contacting us can help us improve!
+
+0. **Auth Token** - Issues with auth tokens would be apparent before a connection is created
+- Verify your client is requesting an auth token
+- Verify your token is being received
+- Verify the [policy](/docs/concepts/terms#policy) on the token is valid for the connection you are trying to create
+- Checkout this for more on [troubleshooting tokens](/docs/getting-started/quick-start#troubleshooting) this for more [understanding tokens](/docs/concepts/terms#token).
 
 1. **Browser WebRTC Internals**
    - Verify SDK version and compatibility

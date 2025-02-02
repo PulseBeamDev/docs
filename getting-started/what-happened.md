@@ -1,6 +1,7 @@
 ---
 title: Quickstart Review
 description: Review of concepts and what happened in Quickstart
+tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
 ## What happened in the Quickstart?
@@ -49,8 +50,8 @@ Token → @pulsebeam/peer SDK peer.start() → PulseBeam Signaling Servers
 
 * Second tab enters `peer-29` in the textbox and clicks `Connect`.
 * The second browser initiates a connection to the first browser.
-* PulseBeam establishes a connection established.
-* `index.html` defines application logic: create data channel and sync text in real time
+* PulseBeam established a connection.
+* Note: `index.html` defines application logic: create data channel and sync text in real time
 ```
 peer → peer.connect('peer-29') → PulseBeam Signaling Servers → connected
 ```
