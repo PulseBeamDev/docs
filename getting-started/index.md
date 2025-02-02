@@ -11,9 +11,9 @@ tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 **Full native WebRTC control without the upfront investment, maintenance, and ongoing complexity.**
 
 * ⚡ **Peer-to-peer first** avoid giving your data to the middlemen
-* 🔒 **End-to-end encrypted** media + signaling + auth controls
+* 🔒 **End-to-end encrypted** media and data
 * 🪄 **Automatic reconnection** + edge-case handling
-* 🔌 **Free** signaling servers & protocol. Self-host or use our ☁️
+* 🔌 **Free** signaling servers & protocol. Self-host or use our cloud
 * 🚀 **Production-ready SDK** own less than 100 lines of code
 * 🛠️ **Actively maintained** OSS stack (no abandoned projects)
 * 🌐 **Global STUN/TURN network** free STUN, usage-based TURN
@@ -118,7 +118,7 @@ PulseBeam is actively developed, with regular updates, security patches, full-ti
 |Security	|❌ Insecure	|✅ End-to-end encryption + BYO auth|
 |Scalability	|❌ Limited	|✅ Built for production|
 |Security Fixes	|`¯\_(ツ)_/¯` Dependency Bot|	Critical Patches <24hr|
-|STUN	|Not provided	| Unlimited Free STUN |
+|STUN	|Public STUN only| Unlimited Free STUN |
 |TURN	|None provided	| Usage-based TURN|
 
 ## 📊 Why Developers Choose PulseBeam

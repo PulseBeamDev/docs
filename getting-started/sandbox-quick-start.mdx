@@ -62,9 +62,11 @@ We strongly recommend setting a unique `groupId` in your applications to avoid c
 
 :::
 
-* The Sandbox environment uses a community-shared PulseBeam Cloud auth token endpoint. It is an auth endpoint using @pulsebeam/server SDK.
+* ⚠️ Sandbox requires external TURN server (not included). Alternatively, you can upgrade your plan to get a built-in TURN.
+* ⚠️ The Sandbox environment uses a community-shared PulseBeam Cloud auth token endpoint. It is an auth endpoint using @pulsebeam/server SDK.
 * PulseBeam connections are globally scoped to a project. 
 * Our [other quickstart](/docs/getting-started/quick-start) goes through creating a PulseBeam Account, Project, and Key. Then setting environment variables and running an auth token endpoint locally. Which will guarantee you don't have collisions.
+
 ## Congratulations! 🎉
 
 You’ve set up a real-time peer-to-peer connection using the PulseBeam Sandbox environment.
@@ -77,6 +79,14 @@ You’ve set up a real-time peer-to-peer connection using the PulseBeam Sandbox 
 * Explore the logs
 * Experiment with the demo
 * Use PulseBeam in your applications 😊
+
+## Other Demos
+
+### Google Meet Clone
+
+Website: https://meet.pulsebeam.dev/
+
+Source: https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react
 
 ## Troubleshooting
 * Check browser console, network tab, make sure your application received a valid auth token. Your request/response should look something like:
