@@ -92,12 +92,4 @@ Refers to PulseBeam's infrastructure / platform that is intended to be used by y
 
 Refers to the [open-source signaling server](https://github.com/PulseBeamDev/pulsebeam-server-foss) that we provide. You can use this in place of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server). We use this server in PulseBeam Cloud, so you can be sure it is working and maintained.
 
-### SANDBOX
-
-Free infrastructure we provide as community-shared signaling infrastructure. It is a free cloud-hosted version of [PulseBeam Cloud](/docs/concepts/terms#pulsebeam-cloud--pulsebeam-server).
-
-Currently, this is one dedicated server in one region. Choosing to run large volumes of traffic through can cause it to go down and prevent others from using it.
-
-Sandbox does not provide access to create [tokens](/docs/concepts/terms#token). To set [security policies](/docs/concepts/terms#policy) and TTL of tokens, you will need to mint tokens. To mint tokens, you will need to get a [Key](/docs/concepts/terms#keys).
-
 ## We are missing something? [Contact us](/docs/community-and-support/discord)

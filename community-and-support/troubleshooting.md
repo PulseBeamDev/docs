@@ -39,7 +39,7 @@ Contact [PulseBeam Support](/docs/community-and-support/support/) we can debug a
 
 ### WebRTC: ICE failed, see about:webrtc for more details
 
-Please make sure that you have provided a production-ready TURN service. Sandbox environment doesn't have a built-in TURN service. You may upgrade your plan or use an external TURN service.
+Please make sure that you have provided a production-ready TURN service. PulseBeam provides a TURN service. If you are on our Sandbox (free) plan you may have run out of bandwidth, you may upgrade your plan or use an external TURN service.
 
 ### Port Conflicts
 **Symptom**: `Error: listen EADDRINUSE: address already in use :::3000`
