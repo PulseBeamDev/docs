@@ -86,14 +86,14 @@ Steps:
     1. Started a server
         ```
         HTTP Server (localhost:3000)
-                    ├── /index.html - frontend code
+                    ├── / -> index.html - frontend code
                     └── /auth - endpoint for token generation
         ```
     2. Experienced a Token Request Workflow
 
         `index.html` instructs browser to make a request to `/auth` for a token.
         ```
-        Browser → GET /index.html
+        Browser → GET / -> index.html
         Browser → Request Token from /auth
         ```
         Before the browser was accepting the private key. Then used it to call a remote PulseBeam endpoint instead of the local `/auth` endpoint 

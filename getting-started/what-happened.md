@@ -4,38 +4,37 @@ description: Review of concepts and what happened in Quickstart
 tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
-## What happened in the Quickstart?
+## What happened in our Quickstart?
 
 ### 1. You setup your local environment
 
 * Pulled down code
 * Built project
-* Set environment variables
+* Set your key
 
 ### 2. Started a Server
 
-* `npm start` spins up the HTTP server (`localhost:3000`)
+* `npm start` spun up the HTTP server (`localhost:3000`)
 
 ```
 HTTP Server (localhost:3000)
-            ├── /index.html - frontend code
-            └── /auth - endpoint for token generation
+            └── / -> index.html - frontend code
 ```
 
 ### 3. Experienced a Token Request Workflow
-* User opens browser loads `index.html`.
-* `index.html` instructs browser to make a request to `/auth` for a token.
+
+* You opened your browser, provided URL `localhost:3000`, which loaded `index.html`.
+* `index.html` instructs browser to make a request to `https://cloud.pulsebeam.dev/sandbox/token` (lets refer to this as `/token` for short) for a token using the key you provided
 ```
-Browser → GET /index.html
-Browser → Request Token from /auth
+Browser → GET / -> index.html → Request Token from /token
 ```
 
 ### 4. Created tokens
 
-* `/auth` uses `@pulsebeam/server` SDK with your environment variables to generate tokens.
+* `/token` uses `@pulsebeam/server` SDK with your key to generate tokens.
 
 ```
-/auth → @pulsebeam/server SDK → Token → Browser
+/token → @pulsebeam/server SDK → Token → Browser
 ```
 
 ### 5. Started peers
@@ -56,7 +55,7 @@ Token → @pulsebeam/peer SDK peer.start() → PulseBeam Signaling Servers
 peer → peer.connect('peer-29') → PulseBeam Signaling Servers → connected
 ```
 
-### Diagram
+### Summary
 
 ![Quickstart Sequence Diagram](../../../../assets/getting-started.quick-start.seq.svg)
 
@@ -72,7 +71,7 @@ We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/com
 
 # Next Steps
 
-* See our guide on [serving auth tokens](/docs/guides/token/)
+* The way we received tokens in the demo (by embedding our private key in our client) was 100% insecure and NOT production ready!! See our guide on [serving tokens in production](/docs/guides/token/)
 * To get some bonus points, see [below](#bonus-points) 
 * Dive into our [Concepts](/docs/concepts/terms)
 * Use PulseBeam in your applications 😊
@@ -80,8 +79,6 @@ We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/com
 ## Bonus points
 
 Experiment with the demo!
-
-### Explore PulseBeam CLI
 
 Update frontend to work with [PulseBeam CLI](/docs/reference/cli/) instead of `/auth` for token generation. 
     <details>
