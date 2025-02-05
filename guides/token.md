@@ -10,13 +10,14 @@ This guide provides production-ready strategies to securely serve PulseBeam toke
 
 Going to production will require you to serve tokens to your users. Tokens are what allow your users to access PulseBeam and are essential for security and auth.
 
-To learn more about terms, checkout our [concepts](/docs/concepts/terms)
-To learn more about security concepts, checkout our [concepts](/docs/concepts/security-and-architecture)
+To learn more about unfamiliar [terms](/docs/concepts/terms)
+
+To learn more about security concepts, checkout our [security concepts](/docs/concepts/security-and-architecture)
 
 ## How to serve tokens?
 
 In our quickstart, we have learned one way to get tokens to your users:
-1. Embed your project secret key into the browser (absolutely insecure, you should not expose your secret key in your clients, this is for development only!!!)
+1. Publish your project's secret key into your client (absolutely insecure, you should not expose your secret key in your clients, this is for development only!!!)
 
 There are several other ways to get tokens:
 1. Serve in a node / deno environment with our `@pulsebeam/server` package. You can host this however you like
@@ -41,7 +42,7 @@ Supported Platforms:
 * ✅ Cloudflare Workers
 
 Steps:
-1. Install SDK
+1. Install [SDK](/docs/reference/server-js/)
 1. Create an API Endpoint
 1. Secure Your Endpoint
 1. Serve tokens
@@ -96,8 +97,9 @@ Steps:
         Browser → GET / -> index.html
         Browser → Request Token from /auth
         ```
-        Before the browser was accepting the private key. Then used it to call a remote PulseBeam endpoint instead of the local `/auth` endpoint 
+        Before the browser was accepting the private key. Which it used to call a remote PulseBeam endpoint instead of embedding the key in your server - local `/auth` endpoint 
     3. Created tokens
+
         `/auth` uses `@pulsebeam/server` SDK with your environment variables to generate tokens.
         ```
         /auth → @pulsebeam/server SDK → Token → Browser
@@ -107,7 +109,7 @@ Steps:
 
 ## 2. Serverless with Cloudflare Page Functions
 
-Use Case: You want to use Cloudflare environment
+Use Case: You want to use Cloudflare's environment
 
 Steps:
 1. Follow Cloudflare setup to host on Cloudflare page functions. See [Cloudflare docs](https://developers.cloudflare.com/pages/functions/).
