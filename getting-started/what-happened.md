@@ -72,7 +72,7 @@ We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/com
 
 # Next Steps
 
-* See our guide on [serving auth tokens](#serving-auth-tokens)
+* See our guide on [serving auth tokens](/docs/guides/token/)
 * To get some bonus points, see [below](#bonus-points) 
 * Dive into our [Concepts](/docs/concepts/terms)
 * Use PulseBeam in your applications 😊

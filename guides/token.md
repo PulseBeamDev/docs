@@ -50,7 +50,7 @@ Steps:
 
 1. Revisiting our Quickstart
 
-    In our [quickstart project]() we generated tokens client-side by embedding our secret key into the browser. For production, we cannot embed our secret key in our clients.
+    In our [quickstart project](/docs/getting-started/quick-start/) we generated tokens client-side by embedding our secret key into the browser. For production, we cannot embed our secret key in our clients.
 
     So if you go back to that project, get your keys (or create new ones). This time were going to create our own auth endpoint.
 
@@ -107,7 +107,7 @@ Steps:
 
 ## 2. Serverless with Cloudflare Page Functions
 
-Use Case: You want to use Cloudflare enviornment
+Use Case: You want to use Cloudflare environment
 
 Steps:
 1. Follow Cloudflare setup to host on Cloudflare page functions. See [Cloudflare docs](https://developers.cloudflare.com/pages/functions/).
