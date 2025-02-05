@@ -53,11 +53,9 @@ You should now have a server running locally on port 3000
 
 ## 3. See it
 
-export const groupId =`group-${Math.floor(Math.random() * 10000)}`
-
 * Go to your browser open two tabs:
-    * URL for first tab: <a href={`http://localhost:3000/?peerId=peer-29&groupId=${groupId}`} target="_blank" rel="noreferrer noopener">localhost:3000/?peerId=peer-29&groupId={`${groupId}`}</a>
-    * URL for second tab: <a href={`http://localhost:3000/?groupId=${groupId}`} target="_blank" rel="noreferrer noopener">localhost:3000/?groupId={`${groupId}`}</a>
+    * URL for first tab: <a href="http://localhost:3000/?peerId=peer-29" target="_blank" rel="noreferrer noopener">localhost:3000/?peerId=peer-29</a>
+    * URL for second tab: <a href="http://localhost:3000/" target="_blank" rel="noreferrer noopener">localhost:3000/</a>
 * On the second tab enter peer-29 in the first text box. Then click connect.
 * Type text in the bottom text box in either tab. Changes will synchronize between peers in real-time using WebRTC data channels.
 
@@ -74,15 +72,14 @@ Next steps:
 * [Learn: What happened?](/docs/getting-started/what-happened/). 
 * Explore the logs
 * Experiment with the demo
-* Use PulseBeam in your applications 😊
 
 ## Other Demos
 
 ### Google Meet Clone
 
-Website: https://meet.pulsebeam.dev/
+Check it out live: https://meet.pulsebeam.dev/
 
-Source: https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react
+Read the source: https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react
 
 ## Troubleshooting
 * Check your environment variables with `echo $PULSEBEAM_API_KEY && echo $PULSEBEAM_API_SECRET`

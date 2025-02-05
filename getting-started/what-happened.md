@@ -70,6 +70,13 @@ PulseBeam will work globally within the scope of your project.
 
 We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/community-and-support/discord/)!
 
+# Next Steps
+
+* See our guide on [serving auth tokens](#serving-auth-tokens)
+* To get some bonus points, see [below](#bonus-points) 
+* Dive into our [Concepts](/docs/concepts/terms)
+* Use PulseBeam in your applications 😊
+
 ## Bonus points
 
 Experiment with the demo!
@@ -81,4 +88,3 @@ Update frontend to work with [PulseBeam CLI](/docs/reference/cli/) instead of `/
     <summary>Hint: </summary>
     One way is to create another input for <code>token</code>, and add a <code>peer.start()</code> button.
     </details>
-
