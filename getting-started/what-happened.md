@@ -71,7 +71,7 @@ We can't wait to see what you build on PulseBeam! [Connect on Discord](/docs/com
 
 # Next Steps
 
-* The way we received tokens in the demo (by embedding our private key in our client) was 100% insecure and NOT production ready!! See our guide on [serving tokens in production](/docs/guides/token/)
+* 🛑 The way we received tokens in the demo (by embedding our private key in our client) was insecure and NOT production ready!  See our guide on [serving tokens in production](/docs/guides/token/)
 * To get some bonus points, see [below](#bonus-points) 
 * Dive into our [Concepts](/docs/concepts/terms)
 * Use PulseBeam in your applications 😊

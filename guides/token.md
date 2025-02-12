@@ -4,48 +4,91 @@ description: Getting Tokens in Production with Pulsebeam
 tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 4 }
 ---
 
+**A Production Guide for Developers**
+
 This guide provides production-ready strategies to securely serve PulseBeam tokens to your users. Choose the method that aligns with your infrastructure and platform needs.
 
-## Why do I want to serve tokens?
+:::note
+You see [unfamiliar terms?](/docs/concepts/terms)
 
-Going to production will require you to serve tokens to your users. Tokens are what allow your users to access PulseBeam and are essential for security and auth.
+Want to learn our [security concepts](/docs/concepts/security-and-architecture)?
+:::
 
-To learn more about unfamiliar [terms](/docs/concepts/terms)
+## Why should I care about **tokens**?
 
-To learn more about security concepts, checkout our [security concepts](/docs/concepts/security-and-architecture)
+[Tokens](/docs/concepts/terms#token) allow your users to access PulseBeam. They are essential for maintaining a security.
+
+## Why should I care about **Security**
+
+Exposing your secret key (`sk_...`) in client-side code (as we did in our quickstart) compromises all users (+ can affect your usage and bills)
+
+Production environments must serve tokens via secure backend methods.
+
+Key Risks to Avoid:
+
+* 🚫 Client-side secret key exposure
+* 🚫 Overprivileged token [policies](/docs/concepts/terms#policy)
+* 🚫 Unsecured endpoints
 
 ## How to serve tokens?
 
 In our quickstart, we have learned one way to get tokens to your users:
-1. Publish your project's secret key into your client (absolutely insecure, you should not expose your secret key in your clients, this is for development only!!!)
+1. ❗ Publish your project's secret key into your client (absolutely insecure, you should not expose your secret key in your clients, this is for development only)
 
-There are several other ways to get tokens:
-1. Serve in a node / deno environment with our `@pulsebeam/server` package. You can host this however you like
-1. Serve in a Cloudflare page functions (serverless) environment with our `@pulsebeam/server` package see [demo here](https://github.com/PulseBeamDev/pulsebeam-js/blob/main/demo-react/functions/auth.ts)
+:::caution
+**To avoid headaches:** Think about your desired users first. 
+
+Should they be authenticated? (Recommended). If yes, you probably want to leverage existing auth logic and middleware, so co-locate token-generation there.
+:::
+
+There are several ways to securely serve tokens:
+1. JS Server SDK (`@pulsebeam/server` package) for Node / Deno / Cloudflare environments.
 1. Use our `rust` src
 1. [PulseBeam CLI](/docs/reference/cli/). This can be used for development or for token generation where there is no other SDK available.
 
-**What are we going to review?**
+# Implementation Options
 
-* Implementation Options: Overview for each token-serving method
-* Security Best Practices: Recommendations to go with your implementation.
+## 1. Official SDKs (Recommended)
 
-# Implementation Options (Official) 
+**Use Case**: Existing JavaScript/TypeScript backend.
 
-## 1. JavaScript/TypeScript Runtimes
+`@pulsebeam/server` Example usage
+```js
+const { API_KEY, API_SECRET } = process.env;
+const app = new AccessToken(API_KEY, API_SECRET);
 
-Use Case: Your existing backend server is in node / deno.
+router.post('/auth', (req, res) => {
+  const claims = new PeerClaims("myGroup1", "myPeer1");
+  const policy = new PeerPolicy("myGroup*", "*");
+  claims.setAllowPolicy(policy);
+
+  const ttlSeconds = 3600;
+  const token = app.createToken(claims, ttlSeconds);
+  res.json({ groupId: "myGroup1", token });
+});
+```
+For more, checkout the `@pulsebeam/server` [SDK documentation](/docs/reference/server-js/)
 
 Supported Platforms:
 * ✅ Node.js
 * ✅ Deno
-* ✅ Cloudflare Workers
+* ✅ Cloudflare Page Functions
+
+Hosting Options:
+* Node/Deno Servers: Express, Fastify, etc.
+* Serverless: AWS Lambda, Cloudflare Page Functions, etc
+* Edge Networks: Fly.io, Vercel Edge, etc
 
 Steps:
 1. Install [SDK](/docs/reference/server-js/)
 1. Create an API Endpoint
 1. Secure Your Endpoint
 1. Serve tokens
+
+Security Notes:
+* 🔒 Always validate user sessions before issuing tokens
+* 🔒 Restrict token TTL (e.g., 1 hour instead of 24)
+* 🔒 Use environment variables for secrets 
 
 ### Example `node.js` http server
 
@@ -105,34 +148,109 @@ Steps:
         /auth → @pulsebeam/server SDK → Token → Browser
         ```
 
-**Next steps**: [🔗 See JS Server SDK Documentation](/docs/reference/server-js/)
+### Cloudflare Page Functions
 
-## 2. Serverless with Cloudflare Page Functions
-
-Use Case: You want to use Cloudflare's environment
-
-Steps:
 1. Follow Cloudflare setup to host on Cloudflare page functions. See [Cloudflare docs](https://developers.cloudflare.com/pages/functions/).
 1. Create a Cloudflare Function. Checkout our [example page function](https://github.com/PulseBeamDev/pulsebeam-js/blob/main/demo-react/functions/auth.ts).
 1. Configure Environment Variables, add PulseBeam Keys.
 1. Secure Your Endpoint
 1. Serve tokens
 
-## 3. Rust Direct Integration
+## 2. Rust Direct Integration
 
-Use Case: Existing Rust server or bare-metal performance. E.g. Host on bare metal, a cloud provider, a container, etc. Or compile with wasm to another language.
+Use Case: Existing Rust server, love 🦀, High-performance, or compile to another [WASM-compatible environment](https://webassembly.org/getting-started/developers-guide/).
 
 Checkout our [Rust source](https://github.com/PulseBeamDev/pulsebeam-core/).
 
+Fun fact, our JS SDK `@pulsebeam/server` is compiled to WASM from this Rust src.
+
+WASM-compatible environments:
+* ✅ Go
+* ✅ Java
+* ✅ PHP
+* ✅ C/C++
+* ✅ Python
+<details><summary>✅ More </summary>
+<ul>
+<li>✅ AssemblyScript (a TypeScript-like syntax)</li>
+<li>✅ C#</li>
+<li>✅ Cobol</li>
+<li>✅ Dart</li>
+<li>✅ F#</li>
+<li>✅ Haskell</li>
+<li>✅ Kotlin</li>
+<li>✅ Moonbit</li>
+<li>✅ Swift</li>
+<li>✅ Scala.js</li>
+<li>✅ D</li>
+<li>✅ Pascal</li>
+<li>✅ RemObjects Elements</li>
+<li>✅ Zig</li>
+<li>✅ Grain</li>
+<li>✅ Scheme</li>
+<li>✅ Ada</li>
+<li>✅ Haskell</li>
+</ul>
+</details>
+
+Example Rust usage
+```rs
+pub const SANDBOX_API_KEY: &str = "kid_<...>";
+pub const SANDBOX_API_SECRET: &str = "sk_<...>";
+pub const SANDBOX_DEFAULT_TTL: u32 = 3600;
+
+pub fn router() -> Router {
+    let cors = CorsLayer::new()
+        .allow_methods([Method::POST])
+        .allow_headers([CONTENT_TYPE, ACCEPT_ENCODING, AUTHORIZATION])
+        .allow_origin(AllowOrigin::mirror_request())
+        .max_age(Duration::from_secs(86400));
+    Router::new().route("/token", post(token)).layer(cors)
+}
+
+#[derive(Deserialize, Debug, Validate)]
+#[serde(rename_all = "camelCase")]
+pub struct TokenForm {
+    pub api_key: String,
+    pub api_secret: String,
+    #[validate(regex(path = *RE_ID))] //^[a-zA-Z0-9_-]{1,36}$
+    pub group_id: String,
+    #[validate(regex(path = *RE_ID))]
+    pub peer_id: String,
+}
+
+async fn token(
+    ValidatedForm(form): ValidatedForm<TokenForm>,
+) -> Result<impl IntoResponse, AppError> {
+    let claims = pulsebeam_core::PeerClaims {
+        group_id: form.group_id,
+        peer_id: form.peer_id,
+        allow_policy: Some(pulsebeam_core::PeerPolicy {
+            group_id: String::from("*"),
+            peer_id: String::from("*"),
+        }),
+    };
+
+    let token = pulsebeam_core::App::new(&form.api_key, &form.api_secret)
+        .create_token(&claims, SANDBOX_DEFAULT_TTL)
+        .context("failed to create sandbox token")?;
+    Ok(token)
+}
+```
+
 Steps:
+1. (Optional) compile to your target language
 1. Import
 1. Create an API Endpoint
 1. Secure Your Endpoint
 1. Serve tokens
 
-Note: our JS SDK `@pulsebeam/server` is compiled to wasm from this rust src.
+Security Notes:
+* 🔒 Always validate user sessions before issuing tokens
+* 🔒 Restrict token TTL (e.g., 1 hour instead of 24)
+* 🔒 Use environment variables for secrets 
 
-## 4. CLI for Non-JS Environments
+## 3. CLI for Non-JS Environments
 
 Use Case: Nothing else works for me
 
@@ -189,9 +307,27 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Error creating token: {str(e)}")
 ```
-## Security Best Practices
 
-Checkout our [Security Checklist](/docs/concepts/security-and-architecture#security-checklist)
+Security Alert:
+🔐 Avoid storing secrets in scripts. Use temporary credential injection
+
+# Security Best Practices
+
+Mandatory Checks
+* Secret Management
+    * Never commit `sk_` keys to version control
+    * Rotate keys immediately if exposed via [PulseBeam Admin Dashboard](https://cloud.pulsebeam.dev)
+* Token Policies
+    * Follow least privilege: `PeerPolicy("chat:room-12", "user-*")`
+    * Avoid wildcard overuse: `PeerPolicy("*", "*")` when possible
+* Network Security
+    * Serve tokens over HTTPS only
+    * Rate-limit token endpoints (e.g., 10 requests/minute per user)
+* Monitoring
+    * Alert on unexpected token volume spikes
+    * Log token creation metadata (user ID, IP, policy)
+
+Checkout our [Full Security Checklist](/docs/concepts/security-and-architecture#security-checklist)
 
 🔐 Remember: Your security is our priority, and a [shared responsibility](/docs/concepts/security-and-architecture#shared-security-responsibility-model).
 
@@ -201,13 +337,13 @@ Checkout our [Security Checklist](/docs/concepts/security-and-architecture#secur
 | Invalid secret format | Check your key format or rotate your key |
 | Token Expired |	Implement client-side renewal logic and/or extend TTL|
 | Invalid Policy |	Validate policy syntax and string format |
-| Unauthorized Peer Connections	| Double-check policy rules, group, and peer IDs|
+| Unauthorized Peer Connections	| Double-check policy rules, group, and peer IDs check PulseBeam Project usage and limits|
 
 # Need Help?
 
 * Want an official SDK for your language/platform? Tell us.
 * Discuss ideas and designs? Book a call
 * Need platform-specific advice?
-* Contributions? [repo](https://github.com/PulseBeamDev/pulsebeam-core/tree/main)
+* Contributions? [See Repository](https://github.com/PulseBeamDev/pulsebeam-core/tree/main)
 
 **-> [Contact us](/docs/community-and-support/support/)**
