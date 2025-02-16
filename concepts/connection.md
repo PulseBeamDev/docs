@@ -8,10 +8,64 @@ PulseBeam simplifies WebRTC connections, managing state, reconnections, and comm
 
 ```js
 peer.start();  
-peer.connect(otherPeer);  
+peer.connect(otherPeer , ...);  
 ```
 
-## Connection State
+# Abstractions
+
+### Session, Connection, and Peer Explained:
+
+Peer:
+* Represents your local entity.
+* Manages authentication (via token), connection settings, and can have multiple Sessions.
+* Can initiate connections to other peers via `peer.connect(...)`.
+
+Session:
+* A single connection to another peer, wrapping an RTCPeerConnection.
+* Handles WebRTC negotiation (offers/answers), ICE candidates, media tracks, and data channels.
+* Equivalent to a "connection" in this context – one Session per remote peer.
+
+Connection:
+* Synonymous with a Session in this abstraction. Each Session represents a bi-directional connection to another peer.
+
+### Key Capabilities:
+
+Multiple Peers: A single Peer can have multiple Sessions (connections) with different remote peers simultaneously.
+```ts
+// Peer can connect to multiple peers
+await peer.connect(group1, "peerA", signal1);
+await peer.connect(group1, "peerB", signal2);
+```
+Data Channels: Each Session supports multiple data channels:
+```ts
+// Create multiple data channels per Session
+const chatChannel = session.createDataChannel("chat");
+const gameDataChannel = session.createDataChannel("game-data");
+```
+Sessions vs Connections:
+
+* 1 Session = 1 Connection to 1 peer. Sessions are not reused between peers.
+
+For Example, let's say
+* Alice is a peer
+* Bob is a peer
+* John is a peer
+* If Bob connects to Alice and Bob connects to John, Bob will have two distinct sessions
+
+
+Flow Diagram:
+```
+Peer
+│
+├── Session 1 (Connection to Peer A)
+│   ├── Data Channel 1
+│   └── Data Channel 2
+│
+└── Session 2 (Connection to Peer B)
+    └── Data Channel 1
+```
+
+# Connection State
 
 To build responsive UIs that adapt to dynamic network, connection, and state conditions, you need to know the connection state. Specifically, the **RTC Peer Connection State** describes this connection state, representing the underlying WebRTC Peer connection state.
  
@@ -92,7 +146,7 @@ By carefully mapping connection states to user-friendly labels and actionable UI
 
 We wish you the best and would love to chat and see what you build, [connect with us](/docs/community-and-support/discord)!
 
-## Token State
+# Token State
 
 Tokens govern user access to PulseBeam's platform. Including session lifetime. 
 
@@ -123,7 +177,7 @@ We would love to change this in the future. Likely next improvement would be to 
 
 If there is enough interest from our community. So [share your thoughts!](/docs/community-and-support/discord)
 
-## PulseBeam Peer State
+# PulseBeam Peer State
 
 For use cases including token invalidation, you can use **PulseBeam Peer State** defined in PulseBeam Peer JS SDK.
 
@@ -144,7 +198,8 @@ The PulseBeam State is `new` or `closed`. When the state is `closed` the Peer mu
 
 # Code Samples
 
-* [React Demo](https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-react)
+* Video https://meet.pulsebeam.dev/ `demo-react`, video call app
+* Data channel `demo-cdn`, our [quickstart demo](/docs/getting-started/quick-start) - [code](https://github.com/PulseBeamDev/pulsebeam-js/tree/main/demo-cdn)
 
 # Learn More
 
