@@ -5,7 +5,7 @@
 
 <img align="right" src="https://pulsebeam.dev/favicon.svg" height="64px" alt="PulseBeam Logo">
 
-This repository contains the source code and content for the official [PulseBeam Documentation](https://pulsebeam.dev/docs). If you see the current documentation is lacking, please feel free to create pull requests.
+This repository contains the source code and content for the official [PulseBeam Documentation](https://docs.pulsebeam.dev). If you see the current documentation is lacking, please feel free to create pull requests.
 
 ## Quickstart
 
