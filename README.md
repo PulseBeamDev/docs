@@ -29,16 +29,16 @@ Open http://localhost:3000 to view the docs.
 
 ## Writing Documentation
 
-Content is located in `content/docs`. We use **MDX** (Markdown + React components).
+Content is located in `content/`. We use **MDX** (Markdown + React components).
 
 ### File Structure
 
-*   `content/docs/*.mdx`: The actual documentation pages. The file path determines the URL.
+*   `content/*.mdx`: The actual documentation pages. The file path determines the URL.
 *   `app/source.ts`: Configuration for the content source adapter.
 
 ### Adding a Page
 
-Create a new `.mdx` file in `content/docs`. Every file requires a frontmatter block at the top:
+Create a new `.mdx` file in `content/`. Every file requires a frontmatter block at the top:
 
 ```mdx
 ---
