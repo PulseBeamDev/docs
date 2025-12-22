@@ -2,4 +2,44 @@
 title: Introduction
 ---
 
-## Work in Progress 🚧
+# Introduction
+
+PulseBeam provides a high-level and opinionated real-time media servers that allows you to build video, audio, and even generic real-time data (faster than websocket)
+to production as fast as possible with minimal friction. 
+
+We use WebRTC as the underlying transport protocol. Unlike traditional WebRTC deployments, we made concious opinions to reduce complexities, and aim for system stability.
+
+Here is a couple of notable choices (If you have feedback on this, you're very welcome to reach us, we want to hear from you!):
+
+1. SFU only
+2. No WebSocket
+3. No STUN & TURN servers
+4. No WebRTC Port Range
+5. H264 and Opus codecs
+
+## SFU Only
+
+There are typically 3 foundational network architectures for WebRTC: 
+
+* P2P: Direct client-to-client. Simple, but bandwidth and number of connections explode with more participants. Not ideal for group calls.
+* MCU: Server mixes everyone’s streams. Easier for clients, but adds latency, heavy server load, and reduces flexibility.
+* SFU: Server forwards streams without heavy processing. Clients handle rendering, so latency stays low, quality stays high, and it scales well with many participants.
+
+PulseBeam chooses SFU only because it hits the sweet spot: scalable, low-latency, high-quality real-time media, and low CPU.
+
+## No WebSocket
+
+We don't use WebSocket. Instead, we categorize WebRTC signaling as 2 separate categories: 
+
+* Connection: join, leave, reconnect
+* Media: media subscription, layout changes, audio level, stream quality
+
+We use HTTP for connection, and data channel for media. The rationale here is to minimize the number of persistent connection from the client to the server.
+After the WebRTC connection is established through HTTP, the client has made a persistent bidirectional connection directly to the server, 
+might as well use this connection for handling media. 
+
+Aside from reducing devops burden to configure infra properly, data channels allow much higher signaling frequency and lower per-message latency. 
+This also means more responsive UI for the end-users.
+
+##
+
