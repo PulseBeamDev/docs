@@ -13,7 +13,7 @@ Here is a couple of notable choices (If you have feedback on this, you're very w
 
 1. SFU only
 2. No WebSocket
-3. No STUN & TURN servers
+3. No STUN & TURN Servers
 4. No WebRTC Port Range
 5. H264 and Opus codecs
 
@@ -41,5 +41,37 @@ might as well use this connection for handling media.
 Aside from reducing devops burden to configure infra properly, data channels allow much higher signaling frequency and lower per-message latency. 
 This also means more responsive UI for the end-users.
 
-##
+## No STUN & TURN Servers
+
+STUN server is used to discover public IP and port of the clients typically used to connect peer-to-peer or automatic server's public IP discovery. TURN servers
+are used as a fallback in case no direct connection can be made.
+
+We don't use STUN servers because PulseBeam is SFU only, and static configuration at server's startup is preferred to avoid potential network failures.
+No TURN servers are needed because PulseBeam requires every deployment to have fixed addressable IPv4 or IPv6 from the clients. We also support
+TCP connections directly. 
+
+While we want to say this is a novel approach, this is a very similar approach that Google Meet has been doing for the past few years in production.
+
+With no STUN and TURN servers, airgap deployment is straightforward. Just run the service binary, no external service is needed.
+
+## No WebRTC Port Range
+
+There's no 1:1 mapping between OS UDP/TCP port and WebRTC connection. Instead, we use a combination of 5-tuple (src_ip, src_port, dst_ip, dst_port, proto), 
+and WebRTC ICE metadata to multiplex a single port. Thus we only require only 2 ports for WebRTC: udp/3478 and tcp/443.
+
+In theory, the server is able to serve much more connections than ~16k connections (typical limit from ephemeral UDP port exhaustion between port 49152 and 65535).
+This is useful for packing more low-load connections like audio-only and/or data-channel only. We haven't done any benchmark for this particular scenario yet, stay tuned!
+
+## H264 and Opus Codecs
+
+To reduce signaling dance, which may cause disrupted end-user streaming experience, we want to avoid reconstructing media streams to different codecs in-flight.
+Thus, we need to allow only 1 codec per media type per room. This certainly trades-off some bandwidth efficiency by choosing a more modern codec in the ideal case. 
+But, we argue that most production systems live in less than ideal world, where we have to support clients with less hardware capability.
+
+For audio, this is easy. Opus won easily. It is so prevalent and robust.
+
+For video, the answer is complicated. There are H264, VP8, VP9, AV1, and maybe AV2 eventually? (of course, there are H265 & H266 too). But, the decision comes down
+to compatibility. H264 is chosen for now as it is the only codec that has penetrated the market with excellent hardware acceleration and software implementation. 
+H264 is widely compatible for most devices ranging from security cameras to televisions. For battery-powered devices like smartphones and laptops, hardware acceleration
+can keep client devices stay cool and last longer. This also means, weaker devices will have similar user experience to the higher-end devices.
 
