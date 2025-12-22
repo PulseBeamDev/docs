@@ -30,8 +30,8 @@ PulseBeam chooses SFU only because it hits the sweet spot: scalable, low-latency
 
 We don't use WebSockets. Instead, we categorize WebRTC signaling into 2 separate categories: 
 
-* **Connection:** join, leave, reconnect
-* **Media:** media subscription, layout changes, audio level, stream quality
+* **Connection (low-frequency):** join, leave, reconnect
+* **Media (high-frequency):** media subscription, layout changes, audio level, stream quality
 
 We use HTTP for connection and data channels for media. The rationale here is to minimize the number of persistent connections from the client to the server. After the WebRTC connection is established through HTTP, the client has a persistent bidirectional connection directly to the server—we might as well use it for handling media. 
 
