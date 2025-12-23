@@ -1,3 +1,44 @@
 ---
 title: Deployment
 ---
+
+## 1 Node
+
+```mermaid
+graph TD;
+subgraph AA [Consumers]
+A[Client];
+B[];
+A --> Z;
+B --> Z;
+C --> Z;
+Z --> E;
+Z --> F;
+Z --> G;
+```
+
+```yaml
+version: "3.8"
+services:
+  pulsebeam:
+    image: ghcr.io/pulsebeamdev/pulsebeam:pulsebeam-v0.3.0
+    restart: unless-stopped
+    network_mode: "host"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - caddy_data:/data
+    command:
+      - caddy
+      - reverse-proxy
+      - --from
+      - demo.pulsebeam.dev
+      - --to
+      - localhost:3000
+
+volumes:
+  caddy_data:
+```
