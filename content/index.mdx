@@ -74,7 +74,7 @@ service is needed.
 There's no 1:1 mapping between an OS UDP/TCP port and a WebRTC connection.
 Instead, we use a combination of the 5-tuple (src_ip, src_port, dst_ip,
 dst_port, proto) and WebRTC ICE metadata to multiplex a single port. Thus, we
-only require 2 ports for WebRTC: **udp/3478** and **tcp/443**.
+only require 2 ports for WebRTC: 1 TCP port and 1 UDP port.
 
 In theory, the server is able to serve much more than ~16k connections (the
 typical limit from ephemeral UDP port exhaustion). This is useful for packing
