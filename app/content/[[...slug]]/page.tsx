@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { GithubIcon } from 'lucide-react';
 
 export default async function Page(props: PageProps<'/content/[[...slug]]'>) {
   const params = await props.params;
@@ -18,7 +19,20 @@ export default async function Page(props: PageProps<'/content/[[...slug]]'>) {
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage toc={page.data.toc} full={page.data.full}
+    >
+
+      <div className="flex mb-4">
+        <a
+          href={`https://github.com/pulsebeamdev/docs/blob/main/content/${page.path}`}
+          rel="noreferrer noopener"
+          target="_blank"
+          className="inline-flex items-center gap-2 rounded-md border bg-fd-secondary px-2 py-1 text-xs font-medium text-fd-secondary-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
+        >
+          <GithubIcon className="size-3" />
+          Edit on GitHub
+        </a>
+      </div>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
