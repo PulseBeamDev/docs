@@ -28,6 +28,8 @@ services:
     image: ghcr.io/pulsebeamdev/pulsebeam:pulsebeam-v0.3.0
     restart: unless-stopped
     network_mode: "host"
+    command:
+      - --dev # this sets rtc port to 3478
 
   caddy:
     image: caddy:2
