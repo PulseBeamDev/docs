@@ -2,12 +2,12 @@
 title: Introduction
 ---
 
-PulseBeam provides a high-level, opinionated real-time media server that allow
+PulseBeam provides a high-level, opinionated real-time media server that allows
 you to build video, audio, and even generic real-time data (faster than
-WebSockets) to production as fast as possible with minimal friction.
+WebSocket) to production as fast as possible with minimal friction.
 
 We use WebRTC as the underlying transport protocol. Unlike traditional WebRTC
-deployments, we made conscious choices to reduce complexity and aim for system
+deployments, we made conscious choices to reduce complexity and aim for the system
 stability.
 
 Here are a couple of notable choices (If you have feedback on this, you're very
@@ -43,11 +43,11 @@ categories:
 - **Media (high-frequency):** media subscription, layout changes, audio level,
   stream quality
 
-We use HTTP for connection and data channels for media. The rationale here is to
+We use HTTP for connections and data channels for media. The rationale here is to
 minimize the number of persistent connections from the client to the server.
 After the WebRTC connection is established through HTTP, the client has a
 persistent bidirectional connection directly to the server—we might as well use
-it for handling media.
+It is for handling media signaling.
 
 Aside from reducing the DevOps burden of configuring infra properly, data
 channels allow much higher signaling frequency and lower per-message latency.
@@ -65,7 +65,7 @@ to have a fixed, addressable IPv4 or IPv6 address. We also support direct TCP
 connections.
 
 While we want to say this is a novel approach, it is very similar to what Google
-Meet has been doing in production for years. With no STUN and TURN servers,
+Meet has been in production for years. With no STUN and TURN servers,
 air-gap deployment is straightforward: just run the service binary. No external
 service is needed.
 
@@ -76,7 +76,7 @@ Instead, we use a combination of the 5-tuple (src_ip, src_port, dst_ip,
 dst_port, proto) and WebRTC ICE metadata to multiplex a single port. Thus, we
 only require 2 ports for WebRTC: 1 TCP port and 1 UDP port.
 
-In theory, the server is able to serve much more than ~16k connections (the
+In theory, the server can serve much more than ~16k connections (the
 typical limit from ephemeral UDP port exhaustion). This is useful for packing
 more low-load connections like audio-only and/or data-channel-only. We haven't
 done any benchmarks for this particular scenario yet—stay tuned!
@@ -97,5 +97,5 @@ there are H265, H266, AV2 too). But the decision comes down to compatibility.
 H264 is chosen for now because it’s the only codec where you can actually count
 on hardware acceleration being present on almost any device—from security
 cameras to cheap TVs. By letting the hardware do the work, the device stays cool
-and the battery lasts longer. This ensures a smooth experience even on weaker
+, and the battery lasts longer. This ensures a smooth experience even on weaker
 devices, rather than forcing a low-end CPU to struggle with software decoding.
